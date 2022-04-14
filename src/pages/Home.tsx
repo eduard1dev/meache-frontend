@@ -6,16 +6,18 @@ import { Container } from '../styles/pages/Home'
 
 export default function Home() {
   const { user } = useContext(AuthContext)
-  useEffect(() => {
-    console.log(user)
-  }, [user])
+
+  console.log("test", user)
   return (
     <Container>
       <h1>
         Bem vindo ao seu dashboard
       </h1>
+      <p>
+        {`sss ${user?.username}`}
+      </p>
       <section className='section-buttons'>
-          {true && 
+          {!user?.hasWhatsappLink && 
             <Link href='/Whatsapp'>
               <button>
                   Crie seu link direto para o whatsapp

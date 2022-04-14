@@ -19,8 +19,12 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     margin: 25px 0;
+    padding: 28px;
+    border-radius: 6px;
     gap: 20px;
     width: 100%;
+    max-width: 400px;
+    background-color: ${({theme}) => theme.colors.grey};
 
     button {
       height: 40px;
@@ -33,5 +37,19 @@ export const Container = styled.div`
       border: none;
       font: ${props => props.theme.fonts.strong};
     }
+  }
+
+  div {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    position: absolute;
+    top: 0;
+    padding: 28px;
+  }
+
+  .back_icon {
+    
+    font-size: 50px;
   }
 `

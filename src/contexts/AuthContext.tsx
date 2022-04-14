@@ -5,8 +5,9 @@ import { api } from "../services/api";
 
 
 interface IUser {
-    name: string,
-    hasWhatsappLink: boolean
+    username: string,
+    hasWhatsappLink: boolean,
+    id: string,
 }
 
 interface IAuthUser {
@@ -24,15 +25,16 @@ export const AuthContext = createContext({} as IAuthContext)
 export const AuthProvider = ({children}) => {
 
     const route = useRouter();
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState<IUser | null>(null)
 
     const isAuthenticated = !!user
 
     const getUserData = async () => {
         try {
-            const response = await api.get('/api/user')
-            setUser(response.data)
-            console.log(response.data)
+            const { data }: {data: IUser} = await api.get('/api/user')
+            console.log(data)
+            setUser(data)
+            
         } catch (error) {
             console.error(error.message)
         }
@@ -40,14 +42,15 @@ export const AuthProvider = ({children}) => {
 
     useEffect(() => {
         const { 'nextauth.token': token } = parseCookies()
-
-        /* if (token) {
+        
+        if (token) {
             getUserData()
+            console.log('pass', {user: 23})
         }
 
         if (!!user && route.asPath == '/') {
             route.push('/Home')
-        } */
+        }
         
         console.log("verify",route.asPath)
         if (token || route.asPath == "/verify") {

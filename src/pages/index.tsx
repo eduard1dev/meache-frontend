@@ -33,14 +33,12 @@ export default function Whatsapp() {
         maxAge: 60 * 60 * 1, // 1 hour
       })
   
-      api.defaults.headers['Token'] = `Bearer ${token}`;
+      api.defaults.headers['token'] = '';
+      api.defaults.headers['token'] = `Bearer ${token}`;
 
-      setUser(response)
-
-      console.log(user)
+      setUser(response.data)
   
       router.push('/Home');
-      console.log(response)
     } catch (error) {
       console.log(error.response.data)
       toast(error.response.data, {

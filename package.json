@@ -1,13 +1,15 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@ant-design/icons": "4.0.0",
     "@types/nookies": "^2.0.3",
     "axios": "^0.26.1",
+    "cross-env": "^7.0.3",
     "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",
     "next": "latest",
