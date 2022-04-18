@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;
@@ -12,7 +12,7 @@ export const Container = styled.div`
   padding: 0 32px 0;
   color: #f0f0f0;
 
-  font: ${props => props.theme.fonts.normal};
+  font: ${(props) => props.theme.fonts.normal};
   text-align: center;
 
   form {
@@ -24,7 +24,7 @@ export const Container = styled.div`
     gap: 20px;
     width: 100%;
     max-width: 400px;
-    background-color: ${({theme}) => theme.colors.grey};
+    background-color: ${({ theme }) => theme.colors.grey};
 
     button {
       height: 40px;
@@ -33,14 +33,15 @@ export const Container = styled.div`
       text-decoration: none;
       border-radius: 8px;
       text-align: center;
-      background-color: ${props => props.theme.colors.primary};
+      background-color: ${(props) => props.theme.colors.primary};
       border: none;
-      font: ${props => props.theme.fonts.strong};
+      font: ${(props) => props.theme.fonts.strong};
     }
   }
 
   div {
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: flex-start;
     position: absolute;
@@ -49,7 +50,6 @@ export const Container = styled.div`
   }
 
   .back_icon {
-    
     font-size: 50px;
   }
-`
+`;

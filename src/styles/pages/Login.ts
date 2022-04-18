@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;
@@ -15,7 +15,7 @@ export const Container = styled.div`
   text-align: center;
 
   h1 {
-    color: ${({theme}) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.text};
   }
 
   form {
@@ -27,9 +27,7 @@ export const Container = styled.div`
     gap: 20px;
     width: 100%;
     max-width: 400px;
-    background-color: ${({theme}) => theme.colors.grey};
-
-    
+    background-color: ${({ theme }) => theme.colors.grey};
 
     div {
       display: flex;
@@ -46,19 +44,18 @@ export const Container = styled.div`
       text-decoration: none;
       border-radius: 4px;
       text-align: center;
-      background-color:  ${({theme}) => theme.colors.primary};
+      background-color: ${({ theme }) => theme.colors.primary};
       border: none;
       outline: none;
 
-      color: ${({theme}) => theme.colors.background};
-      font: ${({theme}) => theme.fonts.strong};
+      color: ${({ theme }) => theme.colors.background};
+      font: ${({ theme }) => theme.fonts.strong};
       font-size: 18px;
       text-transform: uppercase;
     }
 
     a {
-      color: ${({theme}) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.primary};
     }
-    
   }
-`
+`;

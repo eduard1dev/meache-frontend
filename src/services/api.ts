@@ -1,12 +1,12 @@
-import axios from "axios";
-import { parseCookies } from "nookies";
+import axios from 'axios';
+import { parseCookies } from 'nookies';
 
-const { 'nextauth.token': token } = parseCookies()
+const { 'nextauth.token': token } = parseCookies();
 
 export const api = axios.create({
-    baseURL: 'http://localhost:5000'
-})
+  baseURL: 'http://localhost:5000'
+});
 
 if (token) {
-    api.defaults.headers['token'] = `Bearer ${token}`;
+  api.defaults.headers['token'] = `Bearer ${token}`;
 }
