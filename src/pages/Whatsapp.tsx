@@ -1,11 +1,15 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useMemo } from 'react';
 import { Container } from '../styles/pages/Whatsapp';
 import { Input } from '../styles/components/Input';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { api } from '../services/api';
 import { AuthContext } from '../contexts/AuthContext';
-import { LeftCircleFilled } from '@ant-design/icons';
+import { CopyFilled } from '@ant-design/icons';
+import { WhatsappShareButton, WhatsappIcon } from 'react-share';
+
+import { toast } from 'react-toastify';
+import Loading from 'react-loading';
 
 export default function Whatsapp() {
   interface IForm {
@@ -13,9 +17,8 @@ export default function Whatsapp() {
     message: string;
     userUrl: string;
   }
-  const router = useRouter();
-  const { user } = useContext(AuthContext);
-  console.log('test', user);
+  const { user, setUser } = useContext(AuthContext);
+  const [isLoading, setLoading] = useState(true);
 
   const {
     register,
@@ -23,7 +26,13 @@ export default function Whatsapp() {
     watch,
     formState: { errors }
   } = useForm<IForm>();
-  const [whatsappLink, setWhatsappLink] = useState('');
+
+  const whatsappLink = useMemo(
+    () => `http://${process.env.NEXT_PUBLIC_URL}r/${user.userUrl}`,
+    [user.userUrl]
+  );
+
+  const shareMessage = `Olá! Esse é meu link para o Whatsapp:\n${whatsappLink}`;
 
   const onSubmit: SubmitHandler<IForm> = async ({
     message,
@@ -46,33 +55,62 @@ export default function Whatsapp() {
     }
   };
 
-  useEffect(() => {
-    const getUserWhatsappLink = async () => {
-      const response = await api.get(`api/whatsapp/${user?.id}`);
-      setWhatsappLink(response.data.whatsappLink);
-    };
+  /* const getUserWhatsappLink = async () => {
+    const response = await api.get(`api/whatsapp/${user.userUrl}`);
+    setWhatsappLink(response.data.whatsappLink);
+    setUser((state) => ({
+      ...state,
+      whatsappLink: response.data.whatsappLink
+    }));
+  }; */
 
-    if (user) {
-      getUserWhatsappLink();
-    }
-  }, []);
-
-  const handleGoBack = () => {
-    router.back();
+  const copyLinkToClipboard = () => {
+    navigator.clipboard.writeText(whatsappLink);
+    toast('Link copiado!', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      type: 'info'
+    });
   };
+
+  useEffect(() => {
+    if (!!user && !!user?.hasWhatsappLink) {
+      //getUserWhatsappLink();
+      setLoading(false);
+    }
+  }, [user]);
 
   return (
     <Container>
       {!!user?.hasWhatsappLink ? (
-        <div>
+        <>
           <h1>Esse é seu link para o whatsapp</h1>
-          <a href={whatsappLink}>{whatsappLink}</a>
-        </div>
+          <div>
+            <a href={whatsappLink}>{whatsappLink}</a>
+            <div>
+              <div>
+                <CopyFilled style={{ fontSize: 26 }} />
+                <span onClick={copyLinkToClipboard}>Copiar</span>
+              </div>
+              <div>
+                <WhatsappShareButton title="Whatsapp" url={shareMessage}>
+                  <WhatsappIcon
+                    bgStyle={{ fill: '#f8c630' }}
+                    iconFillColor="#121214"
+                    size={32}
+                  />
+                </WhatsappShareButton>
+                <span>Enviar</span>
+              </div>
+            </div>
+          </div>
+        </>
       ) : (
         <>
-          <div>
-            <LeftCircleFilled className="back_icon" onClick={handleGoBack} />
-          </div>
           <h1>Crie seu link direto para o whatsapp</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Input

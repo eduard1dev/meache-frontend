@@ -1,37 +1,96 @@
-import { createContext, useState, useEffect, Dispatch } from 'react';
-import { parseCookies } from 'nookies';
+import {
+  createContext,
+  useState,
+  useEffect,
+  SetStateAction,
+  Dispatch
+} from 'react';
 import { useRouter } from 'next/router';
 import { api } from '../services/api';
+import { SubmitHandler } from 'react-hook-form';
+import { setCookie, parseCookies, destroyCookie } from 'nookies';
+import { toast } from 'react-toastify';
 
 interface IUser {
   username: string;
   hasWhatsappLink: boolean;
   id: string;
+  whatsappLink: URL;
+  userLinks: URL[];
+  userUrl: string;
 }
 
-interface IAuthUser {
-  userId: string;
+interface IForm {
+  username: string;
+  password: string;
 }
 
 interface IAuthContext {
   isAuthenticated: boolean;
   user: IUser;
-  setUser: Dispatch<any>;
+  setUser: Dispatch<SetStateAction<IUser>>;
+  signIn: SubmitHandler<IForm>;
+  handleLogout: () => void;
 }
 
 export const AuthContext = createContext({} as IAuthContext);
 
 export const AuthProvider = ({ children }) => {
   const route = useRouter();
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUser>({} as IUser);
 
   const isAuthenticated = !!user;
+
+  const signIn: SubmitHandler<IForm> = async ({ username, password }) => {
+    try {
+      const response = await api.post(
+        '/api/auth/login',
+        {
+          username,
+          password
+        },
+        { withCredentials: true }
+      );
+
+      const token = response.data.accessToken;
+
+      setCookie(undefined, 'nextauth.token', token, {
+        maxAge: 60 * 60 * 1 // 1 hour
+      });
+
+      api.defaults.headers['token'] = '';
+      api.defaults.headers['token'] = `Bearer ${token}`;
+
+      setUser({ ...user, ...response.data });
+
+      route.push('/Home');
+    } catch (error) {
+      console.log(error.response.data);
+      toast(error.response.data, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        type: 'error'
+      });
+    }
+  };
+
+  const handleLogout = () => {
+    api.defaults.headers['token'] = '';
+    destroyCookie(undefined, 'nextauth.token');
+
+    route.push('/');
+
+    setUser({} as IUser);
+  };
 
   const getUserData = async () => {
     try {
       const { data }: { data: IUser } = await api.get('/api/user');
-      console.log(data);
-      setUser(data);
+      setUser({ ...user, ...data });
     } catch (error) {
       console.error(error.message);
     }
@@ -42,15 +101,9 @@ export const AuthProvider = ({ children }) => {
 
     if (token) {
       getUserData();
-      console.log('pass', { user: 23 });
     }
 
-    if (!!user && route.asPath == '/') {
-      route.push('/Home');
-    }
-
-    console.log('verify', route.asPath);
-    if (token || route.asPath == '/verify') {
+    if (token || route.asPath == '/verify' || route.asPath == '/r/[userUrl]') {
       console.log(token, 'verify', route.asPath);
     } else {
       route.push('/');
@@ -58,7 +111,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, setUser }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, setUser, signIn, handleLogout }}
+    >
       {children}
     </AuthContext.Provider>
   );

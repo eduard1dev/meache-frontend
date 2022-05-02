@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 100vw;
 
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
 
   padding: 0 32px 0;
@@ -39,14 +39,48 @@ export const Container = styled.div`
     }
   }
 
-  div {
+  >div {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    justify-content: flex-start;
-    position: absolute;
-    top: 0;
-    padding: 28px;
+    align-items: center;
+    justify-content: center;
+    background-color: ${({theme}) => theme.colors.grey};
+    border-radius: 6px;
+    padding: 24px 8px;
+
+    margin-top: 26px;
+
+    a {
+      text-decoration: none;
+      text-align: center;
+      border: none;
+      font-family: ${({theme}) => theme.fonts.strong};
+      color: #f0f0f0;
+      margin-bottom: 28px;
+    }
+
+    >div {
+      flex-direction: row;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      gap: 14px;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        font-size: 18px;
+        justify-content: space-between;
+        border-radius: 8px;
+        background-color: ${({theme}) => theme.colors.primary};
+        color: ${({theme}) => theme.colors.background};
+        padding: 8px;
+
+        >span {
+          font-size: 16px;
+        }
+      }
+    }
   }
 
   .back_icon {

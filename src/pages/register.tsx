@@ -19,7 +19,7 @@ export default function Whatsapp() {
     watch,
     formState: { errors }
   } = useForm<IForm>();
-  const [isRegistered, setRegistered] = useState(true);
+  const [isRegistered, setRegistered] = useState(false);
 
   const onSubmit: SubmitHandler<IForm> = async ({
     username,
@@ -44,12 +44,19 @@ export default function Whatsapp() {
     }
   };
 
+  const handleGoBack = () => {
+    router.back();
+  };
+
   return (
     <Container>
       {isRegistered ? (
-        <h1>
-          Pronto! Agora é so verificar sua conta através do email cadastrado.
-        </h1>
+        <>
+          <h1>
+            Pronto! Agora é so verificar sua conta através do email cadastrado.
+          </h1>
+          <button onClick={handleGoBack}>Voltar para o início</button>
+        </>
       ) : (
         <>
           <h1>Crie sua conta</h1>

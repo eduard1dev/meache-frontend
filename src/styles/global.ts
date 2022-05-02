@@ -12,4 +12,13 @@ export default createGlobalStyle`
     color: ${(props) => props.theme.colors.text};
     font: ${(props) => props.theme.fonts.normal};
   }
+
+  main {
+    padding-top: 60px;
+    height: 100vh;
+  }
+
+  /* div {
+    display: flex;
+  } */
 `;

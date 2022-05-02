@@ -2,11 +2,11 @@ import { useState, useReducer, FormEvent, useEffect, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { Container } from '../styles/pages/Login';
 import { Input } from '../styles/components/Input';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { api } from '../services/api';
-import { setCookie, parseCookies } from 'nookies';
-import { toast } from 'react-toastify';
+import { GetServerSideProps } from 'next';
+import { api, getApiClient } from '../services/api';
+import { parseCookies } from 'nookies';
 
 export default function Whatsapp() {
   interface IForm {
@@ -14,7 +14,7 @@ export default function Whatsapp() {
     password: string;
   }
   const router = useRouter();
-  const { setUser, user, isAuthenticated } = useContext(AuthContext);
+  const { setUser, user, isAuthenticated, signIn } = useContext(AuthContext);
 
   const {
     register,
@@ -24,47 +24,14 @@ export default function Whatsapp() {
   } = useForm<IForm>();
   const [link, setLink] = useState('');
 
-  const onSubmit: SubmitHandler<IForm> = async ({ username, password }) => {
-    try {
-      const response = await api.post(
-        '/api/auth/login',
-        {
-          username,
-          password
-        },
-        { withCredentials: true }
-      );
-
-      const token = response.data.accessToken;
-
-      setCookie(undefined, 'nextauth.token', token, {
-        maxAge: 60 * 60 * 1 // 1 hour
-      });
-
-      api.defaults.headers['token'] = '';
-      api.defaults.headers['token'] = `Bearer ${token}`;
-
-      setUser(response.data);
-
-      router.push('/Home');
-    } catch (error) {
-      console.log(error.response.data);
-      toast(error.response.data, {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        type: 'error'
-      });
-    }
-  };
+  /* useEffect(() => {
+    if (!!user) router.push('/Home');
+  }, [user]); */
 
   return (
     <Container>
       <h1>Acesse sua conta</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(signIn)}>
         <div>
           <Input
             {...register('username', { required: true })}
@@ -87,3 +54,21 @@ export default function Whatsapp() {
     </Container>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const apiClient = getApiClient(ctx);
+  const { ['nextauth.token']: token } = parseCookies(ctx);
+  console.log('pass ', token);
+  if (token) {
+    return {
+      redirect: {
+        destination: '/Home',
+        permanent: false
+      }
+    };
+  }
+
+  return {
+    props: {}
+  };
+};

@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <Container>
       <h1>Bem vindo ao seu dashboard</h1>
-      {user.hasWhatsappLink && (
+      {user?.hasWhatsappLink && (
         <section className="section-edit-buttons">
           <h3>Meus Links</h3>
           {!!user?.hasWhatsappLink && (
@@ -27,7 +27,7 @@ export default function Home() {
             <button>Crie seu link direto para o whatsapp</button>
           </Link>
         )}
-        <button>Crie sua pagina de contato</button>
+        <button>Crie sua pagina de contato (em breve...)</button>
       </section>
     </Container>
   );

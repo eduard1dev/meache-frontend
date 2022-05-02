@@ -1,12 +1,18 @@
 import axios from 'axios';
 import { parseCookies } from 'nookies';
 
-const { 'nextauth.token': token } = parseCookies();
+export const getApiClient = (ctx?: any) => {
+  const { 'nextauth.token': token } = parseCookies(ctx);
 
-export const api = axios.create({
-  baseURL: 'http://localhost:5000'
+const api = axios.create({
+  baseURL: 'http://ec2-52-22-114-151.compute-1.amazonaws.com/'
 });
 
-if (token) {
-  api.defaults.headers['token'] = `Bearer ${token}`;
+  if (token) {
+    api.defaults.headers['token'] = `Bearer ${token}`;
+  }
+
+  return api;
 }
+
+export const api = getApiClient();

@@ -6,19 +6,17 @@ import ReactLoading from 'react-loading';
 
 export default function Redirect() {
   const router = useRouter();
-  const [whatsappLink, setWhatsappLink] = useState<URL>();
 
   const { userUrl } = router.query;
 
   useEffect(() => {
     const getLink = async () => {
       try {
-        const response: { data: URL } = await api.get(
+        const { data }: { data: { whatsappLink: URL } } = await api.get(
           `/api/whatsapp/${userUrl}`
         );
-        setWhatsappLink(response.data);
         setInterval(() => {
-          window.location.assign(response.data);
+          window.location.assign(data.whatsappLink);
         }, 3000);
       } catch (err) {
         console.log(err);
