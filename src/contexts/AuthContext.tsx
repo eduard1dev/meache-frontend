@@ -131,7 +131,11 @@ export const AuthProvider = ({ children }) => {
       getUserData();
     }
 
-    if (token || route.asPath == '/verify' || route.asPath == '/r/[userUrl]') {
+    if (
+      token ||
+      route.asPath.includes('verify') ||
+      route.asPath == '/r/[userUrl]'
+    ) {
       console.log(token, 'verify', route.asPath);
     } else {
       route.push('/');

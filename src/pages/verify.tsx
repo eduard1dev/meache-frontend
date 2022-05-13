@@ -1,7 +1,8 @@
 import { useState, useReducer, FormEvent, useEffect } from 'react';
-import { Container } from '../styles/pages/Whatsapp';
+import { Container } from '../styles/pages/Verify';
 import { useRouter } from 'next/router';
 import { api } from '../services/api';
+import { useApi } from '../hooks/useApi';
 import ReactLoading from 'react-loading';
 
 export default function Whatsapp() {
@@ -10,14 +11,12 @@ export default function Whatsapp() {
 
   const { id } = router.query;
 
+  const putVerifyUser = () => api.put(`/api/auth/verify/${id}`);
+  const putVerifyUserApi = useApi(putVerifyUser);
+
   useEffect(() => {
-    const verify = async () => {
-      try {
-        const response = await api.put(`/api/auth/verify/${id}`);
-        setLoading(false);
-      } catch (error) {
-        console.log(error.message);
-      }
+    const verify = () => {
+      putVerifyUserApi.request();
     };
     if (id) verify();
   }, [id]);
@@ -27,8 +26,8 @@ export default function Whatsapp() {
       {isLoading ? (
         <ReactLoading
           type="spinningBubbles"
-          height={50}
-          width={50}
+          height={100}
+          width={100}
           color="#fff"
         />
       ) : (
