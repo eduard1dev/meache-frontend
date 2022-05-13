@@ -14,16 +14,16 @@ export default function Header({ children }: IHeader) {
     router.back();
   };
 
-  const { handleLogout } = useAuth();
+  const { handleLogout, isAuthenticated } = useAuth();
 
   return (
     <>
       <HeaderContainer>
-        {router.asPath !== '/' && router.asPath !== '/Home' && (
+        {router.asPath !== '/' && router.asPath !== '/home' && (
           <LeftCircleFilled className="back_icon" onClick={handleGoBack} />
         )}
         meache
-        <button onClick={handleLogout}>Logout</button>
+        {!!isAuthenticated && <button onClick={handleLogout}>Logout</button>}
       </HeaderContainer>
       <main>{children}</main>
     </>

@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
   const postLogin = (...args: any) => api.post('/api/auth/login', ...args);
   const postLoginApi = useApi(postLogin);
 
-  const isAuthenticated = !!user;
+  const isAuthenticated = !!user.userUrl;
 
   const signIn: SubmitHandler<IForm> = async ({ username, password }) => {
     postLoginApi
