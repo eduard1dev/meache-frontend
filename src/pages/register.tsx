@@ -4,6 +4,7 @@ import { Input } from '../styles/components/Input';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { api } from '../services/api';
+import { useApi } from '../hooks/useApi';
 
 export default function Whatsapp() {
   interface IForm {
@@ -21,27 +22,25 @@ export default function Whatsapp() {
   } = useForm<IForm>();
   const [isRegistered, setRegistered] = useState(false);
 
+  const postRegister = (...args: any[]) =>
+    api.post('/api/auth/register', ...args);
+  const postRegisterApi = useApi(postRegister);
+
   const onSubmit: SubmitHandler<IForm> = async ({
     username,
     email,
     password
   }) => {
-    try {
-      const response = await api.post(
-        '/api/auth/register',
-        {
-          username,
-          email,
-          password
-        },
-        { withCredentials: true }
-      );
+    postRegisterApi.request(
+      {
+        username,
+        email,
+        password
+      },
+      { withCredentials: true }
+    );
 
-      setRegistered(true);
-      console.log(response);
-    } catch (err) {
-      console.error(err);
-    }
+    setRegistered(true);
   };
 
   const handleGoBack = () => {

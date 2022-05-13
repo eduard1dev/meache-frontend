@@ -58,11 +58,11 @@ export default function Whatsapp() {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const apiClient = getApiClient(ctx);
   const { ['nextauth.token']: token } = parseCookies(ctx);
-  console.log('pass ', token);
+
   if (token) {
     return {
       redirect: {
-        destination: '/Home',
+        destination: '/home',
         permanent: false
       }
     };

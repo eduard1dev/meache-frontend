@@ -10,6 +10,7 @@ import { api } from '../services/api';
 import { SubmitHandler } from 'react-hook-form';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
 import { toast } from 'react-toastify';
+import { useApi } from '../hooks/useApi';
 
 interface IUser {
   username: string;
@@ -39,10 +40,37 @@ export const AuthProvider = ({ children }) => {
   const route = useRouter();
   const [user, setUser] = useState<IUser>({} as IUser);
 
+  const postLogin = (...args: any) => api.post('/api/auth/login', ...args);
+  const postLoginApi = useApi(postLogin);
+
   const isAuthenticated = !!user;
 
   const signIn: SubmitHandler<IForm> = async ({ username, password }) => {
-    try {
+    postLoginApi
+      .request(
+        {
+          username,
+          password
+        },
+        { withCredentials: true }
+      )
+      .then((data) => {
+        if (data) {
+          const token = data.accessToken;
+          setCookie(undefined, 'nextauth.token', token, {
+            maxAge: 60 * 60 * 1 // 1 hour
+          });
+
+          api.defaults.headers['token'] = '';
+          api.defaults.headers['token'] = `Bearer ${token}`;
+
+          setUser({ ...user, ...data });
+
+          route.push('/home');
+        }
+      });
+
+    /* try {
       const response = await api.post(
         '/api/auth/login',
         {
@@ -75,7 +103,7 @@ export const AuthProvider = ({ children }) => {
         draggable: true,
         type: 'error'
       });
-    }
+    }*/
   };
 
   const handleLogout = () => {
@@ -87,13 +115,13 @@ export const AuthProvider = ({ children }) => {
     setUser({} as IUser);
   };
 
-  const getUserData = async () => {
-    try {
-      const { data }: { data: IUser } = await api.get('/api/user');
+  const getUser = () => api.get('/api/user');
+  const getUserApi = useApi(getUser);
+
+  const getUserData = () => {
+    getUserApi.request().then((data) => {
       setUser({ ...user, ...data });
-    } catch (error) {
-      console.error(error.message);
-    }
+    });
   };
 
   useEffect(() => {

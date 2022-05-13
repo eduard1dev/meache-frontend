@@ -7,7 +7,6 @@ import { Container } from '../styles/pages/Home';
 export default function Home() {
   const { user } = useContext(AuthContext);
 
-  console.log('test', user);
   return (
     <Container>
       <h1>Bem vindo ao seu dashboard</h1>
@@ -15,7 +14,7 @@ export default function Home() {
         <section className="section-edit-buttons">
           <h3>Meus Links</h3>
           {!!user?.hasWhatsappLink && (
-            <Link href="/Whatsapp">
+            <Link href="/whatsapp">
               <button>Meu link de whatsapp</button>
             </Link>
           )}
@@ -23,7 +22,7 @@ export default function Home() {
       )}
       <section className="section-add-buttons">
         {!user?.hasWhatsappLink && (
-          <Link href="/Whatsapp">
+          <Link href="/whatsapp">
             <button>Crie seu link direto para o whatsapp</button>
           </Link>
         )}
