@@ -25,7 +25,9 @@ export default function Header({ children }: IHeader) {
         meache
         {!!isAuthenticated && <button onClick={handleLogout}>Logout</button>}
       </HeaderContainer>
-      <main>{children}</main>
+      <main>
+        <div>{children}</div>
+      </main>
     </>
   );
 }

@@ -5,7 +5,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Container } from '../styles/pages/Home';
 
 export default function Home() {
-  const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useContext(AuthContext);
+
+  if (!isAuthenticated) return <></>;
 
   return (
     <Container>

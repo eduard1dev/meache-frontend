@@ -11,11 +11,21 @@ export default createGlobalStyle`
     background: ${(props) => props.theme.colors.background};
     color: ${(props) => props.theme.colors.text};
     font: ${(props) => props.theme.fonts.normal};
+    height: 100vh;
+    width: 100vw;
   }
 
   main {
-    padding-top: 60px;
     height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     
+    >div {
+      max-width: 1080px;
+      flex: 1;
+    }
   }
 
   /* div {

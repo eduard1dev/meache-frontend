@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { api, getApiClient } from '../services/api';
 import { parseCookies } from 'nookies';
+import axios from 'axios';
 
 export default function Whatsapp() {
   interface IForm {

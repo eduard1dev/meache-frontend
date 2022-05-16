@@ -6,16 +6,23 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../components/Layout';
 
+import Head from 'next/head';
+
 export default function App({ Component, pageProps }) {
   return (
-    <AuthProvider>
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-          <ToastContainer />
-        </Layout>
-        <GlobalStyle />
-      </ThemeProvider>
-    </AuthProvider>
+    <>
+      <Head>
+        <title>Meache.app</title>
+      </Head>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          <Layout>
+            <Component {...pageProps} />
+            <ToastContainer />
+          </Layout>
+          <GlobalStyle />
+        </ThemeProvider>
+      </AuthProvider>
+    </>
   );
 }
