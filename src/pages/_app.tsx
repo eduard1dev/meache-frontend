@@ -13,6 +13,10 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <title>Meache.app</title>
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        ></meta>
       </Head>
       <AuthProvider>
         <ThemeProvider theme={theme}>
