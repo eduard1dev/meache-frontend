@@ -20,6 +20,9 @@ export default function Home() {
               <button>Meu link de whatsapp</button>
             </Link>
           )}
+          <Link href="/userStats">
+            <button>Veja de onde seus acesso vem!</button>
+          </Link>
         </section>
       )}
       <section className="section-add-buttons">
