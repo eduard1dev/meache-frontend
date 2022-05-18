@@ -5,7 +5,7 @@ export const getApiClient = (ctx?: any) => {
   const { 'nextauth.token': token } = parseCookies(ctx);
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/'
+  baseURL: 'http://ec2-52-91-214-254.compute-1.amazonaws.com/'
 });
 
   if (token) {
