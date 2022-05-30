@@ -55,8 +55,7 @@ export default function Home() {
           label: 'Regiões',
           data: regions.map((item) => item.amount),
           backgroundColor: theme.colors.primary,
-          color: theme.colors.primary,
-          tick: 1
+          color: theme.colors.primary
         }
       ]
     };
