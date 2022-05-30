@@ -8,6 +8,8 @@ import {
   useMemo
 } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import { api } from '../services/api';
+import { useApi } from '../hooks/useApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Container } from '../styles/pages/UserStats';
 import { Bar } from 'react-chartjs-2';
@@ -24,28 +26,35 @@ import {
 
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+interface IRegions {
+  country: string;
+  city: string;
+  state: string;
+  amount: number;
+  _id: string;
+}
+
 export default function Home() {
   const { user, isAuthenticated } = useContext(AuthContext);
+  const [regions, setRegions] = useState<IRegions[]>([]);
   const theme = useTheme();
 
-  if (!isAuthenticated) return <></>;
+  const getUserStats = () => api.get(`/api/stats/${user.id}`);
+  const getUserStatsApi = useApi(getUserStats);
 
-  const regions = [
-    {
-      country: 'Brazil',
-      city: 'Lagarto',
-      state: 'Sergipe',
-      amount: 5,
-      _id: '628522e635f586251422ac21'
-    },
-    {
-      country: 'Not found',
-      city: 'Not found',
-      state: 'Not found',
-      amount: 11,
-      _id: '6285230fdbec3da6303723b2'
-    }
-  ];
+  useEffect(() => {
+    const getStats = () => {
+      getUserStatsApi
+        .request()
+        .then(({ accessAdressList }: { accessAdressList: IRegions[] }) => {
+          if (accessAdressList.length > 0) {
+            setRegions(accessAdressList);
+          }
+        });
+    };
+
+    if (user.id) getStats();
+  }, [user.id]);
 
   const data = useMemo(() => {
     return {
@@ -59,7 +68,9 @@ export default function Home() {
         }
       ]
     };
-  }, []);
+  }, [regions]);
+
+  if (!isAuthenticated) return <></>;
 
   return (
     <Container>
@@ -68,13 +79,15 @@ export default function Home() {
         regiões:
       </h1>
       <section>
-        <Bar
-          data={data}
-          options={{ responsive: true, color: theme.colors.primary }}
-          style={{
-            backgroundColor: theme.colors.grey
-          }}
-        />
+        {regions.length > 0 && (
+          <Bar
+            data={data}
+            options={{ responsive: true, color: theme.colors.primary }}
+            style={{
+              backgroundColor: theme.colors.grey
+            }}
+          />
+        )}
       </section>
     </Container>
   );
