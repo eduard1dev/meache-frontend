@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Input = styled.input`
+interface IInput {
+  hasError?: boolean;
+}
+
+export const Input = styled.input<IInput>`
   height: 52px;
   width: 100%;
   padding-left: 10px;
@@ -8,7 +12,7 @@ export const Input = styled.input`
   text-decoration: none;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.background};
-  border: 2px solid ${({ theme }) => theme.colors.background};
+  border: 2px solid ${({ theme, hasError }) => hasError ? theme.colors.error : theme.colors.background};
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.primary};

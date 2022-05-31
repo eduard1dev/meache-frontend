@@ -55,6 +55,7 @@ export const Container = styled.div`
 
     a {
       color: ${({ theme }) => theme.colors.primary};
+      cursor: pointer;
     }
   }
 `;

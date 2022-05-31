@@ -56,5 +56,11 @@ export const Container = styled.div`
     a {
       color: ${({ theme }) => theme.colors.primary};
     }
+
+    span {
+      display: flex;
+      font-size: 14px;
+      text-align: left;
+    }
   }
 `;

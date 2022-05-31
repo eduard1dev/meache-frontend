@@ -21,7 +21,7 @@ export default function Home() {
             </Link>
           )}
           <Link href="/userStats">
-            <button>Veja de onde seus acesso vem!</button>
+            <button>Veja de onde estão acessando seu link!</button>
           </Link>
         </section>
       )}

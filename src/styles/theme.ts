@@ -3,7 +3,8 @@ const theme = {
     background: '#121214',
     grey: '#303036',
     text: '#fff',
-    primary: '#f8c630'
+    primary: '#f8c630',
+    error: '#cc0000'
   },
   fonts: {
     normal: '400 15px Roboto, sans-serif',

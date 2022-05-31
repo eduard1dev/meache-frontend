@@ -7,6 +7,7 @@ export const useApi = (
 ) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  console.log(error);
 
   const request = async (data?: any, config?: AxiosRequestConfig<any>) => {
     setLoading(true);
@@ -15,16 +16,23 @@ export const useApi = (
       const result = await apiFunc(data, config);
       return result.data;
     } catch (err) {
-      setError(err.response.data || 'Unexpected Error!');
-      toast(err.response.data || 'Unexpected Error!', {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        type: 'error'
-      });
+      setError(
+        (typeof err?.response?.data == 'string' && err?.response?.data) ||
+          'Unexpected Error!'
+      );
+      toast(
+        (typeof err?.response?.data == 'string' && err?.response?.data) ||
+          'Unexpected Error!',
+        {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          type: 'error'
+        }
+      );
     } finally {
       setLoading(false);
     }
