@@ -15,11 +15,11 @@ export default function Redirect() {
         /* const { data }: { data: { whatsappLink: URL } } = await api.get(
           `/api/whatsapp/${userUrl}`
         ); */
-        /* setInterval(() => {
-          window.location.replace(
-            ''
+        setInterval(() => {
+          window.open(
+            'https://api.whatsapp.com/send?phone=5579999997788&text=Hi'
           );
-        }, 3000); */
+        }, 3000);
       } catch (err) {
         console.log(err);
       }
@@ -30,9 +30,6 @@ export default function Redirect() {
   return (
     <Container>
       <h1 className="username">toaqui.ee</h1>
-      <a href="https://api.whatsapp.com/send?phone=5579999997788&text=Hi">
-        Iniciar conversa
-      </a>
       <ReactLoading
         type="spinningBubbles"
         height={50}
