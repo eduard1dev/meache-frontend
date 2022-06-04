@@ -17,7 +17,7 @@ export default function Redirect() {
         ); */
         setInterval(() => {
           window.location.replace(
-            'whatsapp://send?phone=5579999997788&text=Olá,funcionou ssskkkkk kkk"'
+            'intent://wa.me/send?phone=5579999997788&text=Olá,funcionou ssskkkkk kkk'
           );
         }, 3000);
       } catch (err) {
