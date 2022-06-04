@@ -12,11 +12,13 @@ export default function Redirect() {
   useEffect(() => {
     const getLink = async () => {
       try {
-        const { data }: { data: { whatsappLink: URL } } = await api.get(
+        /* const { data }: { data: { whatsappLink: URL } } = await api.get(
           `/api/whatsapp/${userUrl}`
-        );
+        ); */
         setInterval(() => {
-          window.location.assign(data.whatsappLink);
+          window.location.replace(
+            'whatsapp://send?phone=5579999997788&text=Olá,funcionou ssskkkkk kkk"'
+          );
         }, 3000);
       } catch (err) {
         console.log(err);
