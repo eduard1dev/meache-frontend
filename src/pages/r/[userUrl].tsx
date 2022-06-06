@@ -25,12 +25,15 @@ export default function Redirect() {
         console.log(err);
       }
     };
-    if (userUrl) getLink();
+    //if (userUrl) getLink();
   }, [userUrl]);
 
   return (
     <Container>
       <h1 className="username">toaqui.ee</h1>
+      <a href="intent://send/5579999997788#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">
+        Open WhatsApp chat window
+      </a>
       <ReactLoading
         type="spinningBubbles"
         height={50}
