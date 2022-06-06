@@ -16,8 +16,9 @@ export default function Redirect() {
           `/api/whatsapp/${userUrl}`
         ); */
         setInterval(() => {
-          window.location.replace(
-            'https://api.whatsapp.com/send?phone=5579999997788&text=Hi'
+          window.open(
+            'https://api.whatsapp.com/send?phone=5579999997788&text=Hi',
+            '_blank'
           );
         }, 3000);
       } catch (err) {
