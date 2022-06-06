@@ -15,10 +15,9 @@ export default function Redirect() {
         /* const { data }: { data: { whatsappLink: URL } } = await api.get(
           `/api/whatsapp/${userUrl}`
         ); */
-        setInterval(() => {
+        setTimeout(() => {
           window.open(
-            'https://api.whatsapp.com/send?phone=5579999997788&text=Hi',
-            '_blank'
+            'https://api.whatsapp.com/send?phone=5579999997788&text=Hi'
           );
         }, 3000);
       } catch (err) {
@@ -31,9 +30,6 @@ export default function Redirect() {
   return (
     <Container>
       <h1 className="username">toaqui.ee</h1>
-      <a href="intent://send/5579999997788#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">
-        Open WhatsApp chat window
-      </a>
       <ReactLoading
         type="spinningBubbles"
         height={50}
