@@ -16,7 +16,7 @@ export default function Redirect() {
           `/api/whatsapp/${userUrl}`
         ); */
         setTimeout(() => {
-          window.open(
+          window.location.replace(
             'https://api.whatsapp.com/send?phone=5579999997788&text=Hi'
           );
         }, 3000);
