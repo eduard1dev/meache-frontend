@@ -24,7 +24,7 @@ export default function Redirect() {
         console.log(err);
       }
     };
-    //if (userUrl) getLink();
+    if (userUrl) getLink();
   }, [userUrl]);
 
   return (
