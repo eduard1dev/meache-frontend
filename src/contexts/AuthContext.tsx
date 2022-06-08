@@ -32,6 +32,7 @@ interface IAuthContext {
   setUser: Dispatch<SetStateAction<IUser>>;
   signIn: SubmitHandler<IForm>;
   handleLogout: () => void;
+  postLoginApi: ReturnType<typeof useApi>;
 }
 
 export const AuthContext = createContext({} as IAuthContext);
@@ -144,7 +145,14 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, setUser, signIn, handleLogout }}
+      value={{
+        user,
+        isAuthenticated,
+        setUser,
+        signIn,
+        handleLogout,
+        postLoginApi
+      }}
     >
       {children}
     </AuthContext.Provider>

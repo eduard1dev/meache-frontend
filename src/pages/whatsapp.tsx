@@ -92,11 +92,11 @@ export default function Whatsapp() {
           <div>
             <a href={whatsappLink}>{whatsappLink}</a>
             <div>
-              <div>
+              <button>
                 <CopyFilled style={{ fontSize: 26 }} />
                 <span onClick={copyLinkToClipboard}>Copiar</span>
-              </div>
-              <div>
+              </button>
+              <button>
                 <WhatsappShareButton title="Whatsapp" url={shareMessage}>
                   <WhatsappIcon
                     bgStyle={{ fill: '#f8c630' }}
@@ -105,7 +105,7 @@ export default function Whatsapp() {
                   />
                 </WhatsappShareButton>
                 <span>Enviar</span>
-              </div>
+              </button>
             </div>
           </div>
         </>

@@ -38,6 +38,7 @@ export const Container = styled.div`
       border: none;
       font: ${(props) => props.theme.fonts.strong};
       font-size: 16px;
+      cursor: pointer;
     }
   }
 
@@ -58,6 +59,7 @@ export const Container = styled.div`
       height: 60px;
       width: 100%;
 
+      cursor: pointer;
       text-decoration: none;
       border-radius: 8px;
       text-align: center;

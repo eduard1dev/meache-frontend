@@ -11,6 +11,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { api } from '../services/api';
 import { useApi } from '../hooks/useApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import ReactLoading from 'react-loading';
 import { Container } from '../styles/pages/UserStats';
 import { Bar } from 'react-chartjs-2';
 import { useTheme } from 'styled-components';
@@ -79,14 +80,18 @@ export default function Home() {
         regiões:
       </h1>
       <section>
-        {regions.length > 0 && (
-          <Bar
-            data={data}
-            options={{ responsive: true, color: theme.colors.primary }}
-            style={{
-              backgroundColor: theme.colors.grey
-            }}
-          />
+        {getUserStatsApi.loading ? (
+          <ReactLoading type="spin" />
+        ) : (
+          regions.length > 0 && (
+            <Bar
+              data={data}
+              options={{ responsive: true, color: theme.colors.primary }}
+              style={{
+                backgroundColor: theme.colors.grey
+              }}
+            />
+          )
         )}
       </section>
     </Container>

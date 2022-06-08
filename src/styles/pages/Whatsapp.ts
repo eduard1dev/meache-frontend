@@ -35,6 +35,7 @@ export const Container = styled.div`
       background-color: ${(props) => props.theme.colors.primary};
       border: none;
       font: ${(props) => props.theme.fonts.strong};
+      cursor: pointer;
     }
   }
 
@@ -65,15 +66,21 @@ export const Container = styled.div`
       width: 100%;
       gap: 14px;
 
-      div {
+      button {
+        cursor: pointer;
         display: flex;
         flex-direction: column;
+        align-items: center;
         font-size: 18px;
+        text-decoration: none;
+        text-align: center;
         justify-content: space-between;
         border-radius: 8px;
+        border: none;
         background-color: ${({theme}) => theme.colors.primary};
         color: ${({theme}) => theme.colors.background};
         padding: 8px;
+        font: ${(props) => props.theme.fonts.strong};
 
         >span {
           font-size: 16px;

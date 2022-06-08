@@ -28,7 +28,7 @@ export default createGlobalStyle`
     }
   }
 
-  /* div {
-    display: flex;
-  } */
+  button {
+    cursor: pointer
+  }
 `;

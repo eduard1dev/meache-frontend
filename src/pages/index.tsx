@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { api, getApiClient } from '../services/api';
 import { parseCookies } from 'nookies';
-import axios from 'axios';
+import ReactLoading from 'react-loading';
 
 export default function Whatsapp() {
   interface IForm {
@@ -15,7 +15,7 @@ export default function Whatsapp() {
     password: string;
   }
   const router = useRouter();
-  const { setUser, user, isAuthenticated, signIn } = useContext(AuthContext);
+  const { postLoginApi, signIn } = useContext(AuthContext);
 
   const {
     register,
@@ -45,7 +45,13 @@ export default function Whatsapp() {
           />
         </div>
         <div>
-          <button type="submit">Entrar</button>
+          <button type="submit">
+            {postLoginApi.loading ? (
+              <ReactLoading type="spin" height={30} width={30} color="#000" />
+            ) : (
+              'Entrar'
+            )}
+          </button>
           <p>
             Não tem uma conta?{' '}
             <a onClick={() => router.push('/register')}>Registre-se</a>
