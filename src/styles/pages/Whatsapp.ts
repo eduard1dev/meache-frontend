@@ -44,9 +44,11 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     background-color: ${({theme}) => theme.colors.grey};
     border-radius: 6px;
     padding: 24px 8px;
+    min-width: 300px;
 
     margin-top: 26px;
 

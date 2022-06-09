@@ -13,19 +13,8 @@ import { useApi } from '../hooks/useApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ReactLoading from 'react-loading';
 import { Container } from '../styles/pages/UserStats';
-import { Bar } from 'react-chartjs-2';
 import { useTheme } from 'styled-components';
-import {
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  Chart
-} from 'chart.js';
-
-Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+import DataTable from 'react-data-table-component';
 
 interface IRegions {
   country: string;
@@ -57,43 +46,64 @@ export default function Home() {
     if (user.id) getStats();
   }, [user.id]);
 
-  const data = useMemo(() => {
-    return {
-      labels: regions.map((item) => item.city),
-      datasets: [
-        {
-          label: 'Regiões',
-          data: regions.map((item) => item.amount),
-          backgroundColor: theme.colors.primary,
-          color: theme.colors.primary
-        }
-      ]
-    };
-  }, [regions]);
+  const columns = useMemo(() => {
+    return [
+      { name: 'País', selector: (row) => row.country },
+      { name: 'Estado', selector: (row) => row.state },
+      { name: 'Cidade', selector: (row) => row.city },
+      {
+        name: 'Acessos',
+        selector: (row) => row.amount,
+        sortable: true
+      }
+    ];
+  }, []);
 
   if (!isAuthenticated) return <></>;
 
   return (
     <Container>
-      <h1>
-        Os usuários que acessaram o seu link de whatsapp estão nas seguintes
-        regiões:
-      </h1>
-      <section>
-        {getUserStatsApi.loading ? (
-          <ReactLoading type="spin" />
-        ) : (
-          regions.length > 0 && (
-            <Bar
-              data={data}
-              options={{ responsive: true, color: theme.colors.primary }}
-              style={{
-                backgroundColor: theme.colors.grey
+      {getUserStatsApi.loading ? (
+        <ReactLoading type="spin" />
+      ) : (
+        <section>
+          <h1>
+            Os usuários que acessaram o seu link de whatsapp estão nas seguintes
+            regiões:
+          </h1>
+          {regions.length > 0 && (
+            <DataTable
+              data={regions}
+              columns={columns}
+              responsive
+              defaultSortAsc={false}
+              defaultSortFieldId={4}
+              customStyles={{
+                table: {
+                  style: {
+                    borderRadius: 8
+                  }
+                },
+                headRow: {
+                  style: {
+                    borderRadius: 8,
+                    backgroundColor: theme.colors.primary,
+                    fontFamily: theme.fonts.strong,
+                    fontSize: 16
+                  }
+                },
+                rows: {
+                  style: {
+                    borderRadius: 8,
+                    fontFamily: theme.fonts.normal,
+                    fontSize: 16
+                  }
+                }
               }}
             />
-          )
-        )}
-      </section>
+          )}
+        </section>
+      )}
     </Container>
   );
 }

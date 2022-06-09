@@ -17,13 +17,13 @@ export default createGlobalStyle`
 
   main {
     height: 100vh;
-    width: 100vw;
+    max-width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
      
     >div {
-      max-width: 1080px;
+      max-width: 720px;
       flex: 1;
     }
   }
