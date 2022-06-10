@@ -7,8 +7,9 @@ const theme = {
     error: '#cc0000'
   },
   fonts: {
-    normal: '400 15px Roboto, sans-serif',
-    strong: '700 15px Roboto, sans-serif'
+    light: '300 1rem Open Sans, sans-serif',
+    normal: '400 1rem Open Sans, sans-serif',
+    strong: '600 1rem Open Sans, sans-serif'
   }
 };
 

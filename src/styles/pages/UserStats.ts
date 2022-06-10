@@ -15,6 +15,10 @@ export const Container = styled.div`
   font: ${(props) => props.theme.fonts.normal};
   text-align: center;
 
+  h1 {
+    font-size: 2.4rem;
+  }
+
   h3 {
     align-self: flex-start;
   }

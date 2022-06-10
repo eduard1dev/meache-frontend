@@ -22,6 +22,7 @@ export const Input = styled.input<IInput>`
 
   transition: border 0.2s ease 0s;
 
-  font: ${(props) => props.theme.fonts.normal};
+  font: ${({ theme }) => theme.fonts.normal};
+  font-size: 1.6rem;
   color: ${({ theme }) => theme.colors.text};
 `;

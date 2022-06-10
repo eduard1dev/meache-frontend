@@ -71,14 +71,14 @@ export default function Whatsapp() {
                 minLength: 3,
                 maxLength: 100
               })}
-              placeholder="username"
+              placeholder="Usuário"
               hasError={!!errors?.username}
             />
             <Input
               {...register('email', {
                 required: true
               })}
-              placeholder="email"
+              placeholder="Email"
               hasError={!!errors?.email}
               type="email"
             />
@@ -94,7 +94,7 @@ export default function Whatsapp() {
                   hasNonalphas: (v) => !!v.match(/\W/)
                 }
               })}
-              placeholder="senha"
+              placeholder="Senha"
               //type="password"
               hasError={!!errors?.password}
               onChange={() => {

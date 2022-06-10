@@ -14,6 +14,10 @@ export const Container = styled.div`
   font: ${(props) => props.theme.fonts.normal};
   text-align: center;
 
+  h1 {
+    font-size: 3.2rem;
+  }
+
   form {
     display: flex;
     flex-direction: column;
@@ -56,7 +60,8 @@ export const Container = styled.div`
       text-decoration: none;
       text-align: center;
       border: none;
-      font-family: ${({theme}) => theme.fonts.strong};
+      font: ${({theme}) => theme.fonts.normal};
+      font-size: 1.8rem;
       color: #f0f0f0;
       margin-bottom: 28px;
     }
@@ -73,7 +78,7 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        font-size: 18px;
+        font-size: 1.8rem;
         text-decoration: none;
         text-align: center;
         justify-content: space-between;
@@ -85,13 +90,13 @@ export const Container = styled.div`
         font: ${(props) => props.theme.fonts.strong};
 
         >span {
-          font-size: 16px;
+          font-size: 1.6rem;
         }
       }
     }
   }
 
   .back_icon {
-    font-size: 50px;
+    font-size: 5.0rem;
   }
 `;

@@ -10,7 +10,7 @@ export const HeaderContainer = styled.header`
     justify-content: space-between;
     align-items: center;
     padding: 0 28px;
-    font-size: 32px;
+    font-size: 3.2rem;
     
     background-color: ${({theme} )=> theme.colors.grey};
 
@@ -23,6 +23,6 @@ export const HeaderContainer = styled.header`
       padding: 20px 0 20px 0;
       font: ${(props) => props.theme.fonts.normal};
       color: ${(props) => props.theme.colors.text};
-      font-size: 16px;
+      font-size: 1.6rem;
     }
 `;

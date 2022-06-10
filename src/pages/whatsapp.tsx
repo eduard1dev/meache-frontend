@@ -28,7 +28,7 @@ export default function Whatsapp() {
   } = useForm<IForm>();
 
   const whatsappLink = useMemo(
-    () => `http://${process.env.NEXT_PUBLIC_URL}r/${user.userUrl}`,
+    () => `${process.env.NEXT_PUBLIC_URL}r/${user.userUrl}`,
     [user.userUrl]
   );
 

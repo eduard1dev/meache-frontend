@@ -15,6 +15,7 @@ export const Container = styled.div`
 
   h1 {
     color: ${({ theme }) => theme.colors.text};
+    font-size: 3.2rem;
   }
 
   form {
@@ -49,7 +50,7 @@ export const Container = styled.div`
 
       color: ${({ theme }) => theme.colors.background};
       font: ${({ theme }) => theme.fonts.strong};
-      font-size: 18px;
+      font-size: 1.8rem;
       text-transform: uppercase;
     }
 
@@ -59,7 +60,7 @@ export const Container = styled.div`
 
     span {
       display: flex;
-      font-size: 14px;
+      font-size: 1.4rem;
       text-align: left;
     }
   }

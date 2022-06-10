@@ -16,10 +16,12 @@ export const Container = styled.div`
 
   h1 {
     margin: 40px 0;
+    font-size: 3.2rem;
   }
 
   h3 {
     align-self: flex-start;
+    font-size: 1.6rem;
   }
 
   section.section-add-buttons {
@@ -37,7 +39,7 @@ export const Container = styled.div`
       background-color: ${(props) => props.theme.colors.primary};
       border: none;
       font: ${(props) => props.theme.fonts.strong};
-      font-size: 16px;
+      font-size: 1.6rem;
       cursor: pointer;
     }
   }
@@ -66,7 +68,7 @@ export const Container = styled.div`
       background-color: ${(props) => props.theme.colors.primary};
       border: none;
       font: ${(props) => props.theme.fonts.strong};
-      font-size: 16px;
+      font-size: 1.6rem;
     }
   }
 `;
