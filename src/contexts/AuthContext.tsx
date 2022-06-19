@@ -70,41 +70,6 @@ export const AuthProvider = ({ children }) => {
           route.push('/home');
         }
       });
-
-    /* try {
-      const response = await api.post(
-        '/api/auth/login',
-        {
-          username,
-          password
-        },
-        { withCredentials: true }
-      );
-
-      const token = response.data.accessToken;
-
-      setCookie(undefined, 'nextauth.token', token, {
-        maxAge: 60 * 60 * 1 // 1 hour
-      });
-
-      api.defaults.headers['token'] = '';
-      api.defaults.headers['token'] = `Bearer ${token}`;
-
-      setUser({ ...user, ...response.data });
-
-      route.push('/Home');
-    } catch (error) {
-      console.log(error.response.data);
-      toast(error.response.data, {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        type: 'error'
-      });
-    }*/
   };
 
   const handleLogout = () => {

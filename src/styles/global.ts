@@ -35,4 +35,8 @@ export default createGlobalStyle`
   button {
     cursor: pointer
   }
+
+  .Toastify__toast {
+    font-size: 1.6rem
+  }
 `;

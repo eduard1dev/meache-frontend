@@ -1,10 +1,13 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useAuth } from '../contexts/useAuth';
 
 export const useApi = (
   apiFunc: (data, config) => Promise<AxiosResponse<any, any>>
 ) => {
+  const { handleLogout } = useAuth();
+
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   console.log(error);
@@ -33,6 +36,12 @@ export const useApi = (
           type: 'error'
         }
       );
+      if (
+        typeof err?.response?.data == 'string' &&
+        err?.response?.data == 'jwt expired'
+      ) {
+        handleLogout();
+      }
     } finally {
       setLoading(false);
     }

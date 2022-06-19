@@ -1,8 +1,9 @@
 import { useState, useContext, useEffect, useMemo } from 'react';
 import { Container } from '../styles/pages/Whatsapp';
 import { Input } from '../styles/components/Input';
+import Button from '../components/Button';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
+import { useApi } from '../hooks/useApi';
 import { api } from '../services/api';
 import { AuthContext } from '../contexts/AuthContext';
 import { CopyFilled } from '@ant-design/icons';
@@ -18,7 +19,6 @@ export default function Whatsapp() {
     userUrl: string;
   }
   const { user, setUser } = useContext(AuthContext);
-  const [isLoading, setLoading] = useState(true);
 
   const {
     register,
@@ -34,22 +34,34 @@ export default function Whatsapp() {
 
   const shareMessage = `Olá! Esse é meu link para o Whatsapp:\n${whatsappLink}`;
 
+  const postWhatsapp = (...args: any[]) =>
+    api.post(`/api/whatsapp/${user.id!}`, ...args);
+  const postWhatsappApi = useApi(postWhatsapp);
+
   const onSubmit: SubmitHandler<IForm> = async ({
     message,
     phone,
     userUrl
   }) => {
     try {
-      const response = await api.post(
-        `/api/whatsapp/${user.id!}`,
-        {
-          phone,
-          message,
-          userUrl
-        },
-        { withCredentials: true }
-      );
-      console.log(response);
+      postWhatsappApi
+        .request(
+          {
+            phone,
+            message,
+            userUrl
+          },
+          { withCredentials: true }
+        )
+        .then((data) => {
+          if (data) {
+            setUser({
+              ...user,
+              hasWhatsappLink: true,
+              whatsappLink: data.whatsappLink
+            });
+          }
+        });
     } catch (err) {
       console.error(err);
     }
@@ -80,7 +92,7 @@ export default function Whatsapp() {
   useEffect(() => {
     if (!!user && !!user?.hasWhatsappLink) {
       //getUserWhatsappLink();
-      setLoading(false);
+      //setLoading(false);
     }
   }, [user]);
 
@@ -125,7 +137,11 @@ export default function Whatsapp() {
               {...register('message', { required: true })}
               placeholder="digite a mensagem"
             />
-            <button type="submit">Criar</button>
+            <Button
+              type="submit"
+              loading={postWhatsappApi.loading}
+              title="Criar"
+            />
           </form>
         </>
       )}

@@ -9,7 +9,8 @@ const theme = {
   fonts: {
     light: '300 1rem Open Sans, sans-serif',
     normal: '400 1rem Open Sans, sans-serif',
-    strong: '600 1rem Open Sans, sans-serif'
+    strong: '600 1rem Open Sans, sans-serif',
+    logo: '400 3.5rem Pacifico, cursive;'
   }
 };
 

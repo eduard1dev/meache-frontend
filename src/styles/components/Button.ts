@@ -1,0 +1,22 @@
+import styled from 'styled-components';
+
+export const Button = styled.button`
+    display: flex;
+    height: 40px;
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+
+    text-decoration: none;
+    border-radius: 8px;
+    text-align: center;
+    background-color: ${({ theme }) => theme.colors.primary};
+    border: none;
+    outline: none;
+
+    color: ${({ theme }) => theme.colors.background};
+    font: ${({ theme }) => theme.fonts.strong};
+    font-size: 1.8rem;
+`;

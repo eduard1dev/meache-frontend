@@ -22,7 +22,7 @@ export default function Header({ children }: IHeader) {
         {router.asPath !== '/' && router.asPath !== '/home' && (
           <LeftCircleFilled className="back_icon" onClick={handleGoBack} />
         )}
-        meache
+        <a href="/">meache</a>
         {!!isAuthenticated && <button onClick={handleLogout}>Logout</button>}
       </HeaderContainer>
       <main>

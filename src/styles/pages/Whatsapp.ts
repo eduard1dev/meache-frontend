@@ -28,19 +28,6 @@ export const Container = styled.div`
     width: 100%;
     max-width: 400px;
     background-color: ${({ theme }) => theme.colors.grey};
-
-    button {
-      height: 40px;
-      width: 100%;
-
-      text-decoration: none;
-      border-radius: 8px;
-      text-align: center;
-      background-color: ${(props) => props.theme.colors.primary};
-      border: none;
-      font: ${(props) => props.theme.fonts.strong};
-      cursor: pointer;
-    }
   }
 
   >div {
