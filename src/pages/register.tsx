@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { api } from '../services/api';
 import { useApi } from '../hooks/useApi';
+import Button from '../components/Button';
 
 export default function Whatsapp() {
   interface IForm {
@@ -56,10 +57,10 @@ export default function Whatsapp() {
     <Container>
       {isRegistered ? (
         <>
-          <h1>
+          <h1 className="success">
             Pronto! Agora é so verificar sua conta através do email cadastrado.
           </h1>
-          <button onClick={handleGoBack}>Voltar para o início</button>
+          <Button title="Voltar para o início" onClick={handleGoBack} />
         </>
       ) : (
         <>
@@ -71,7 +72,7 @@ export default function Whatsapp() {
                 minLength: 3,
                 maxLength: 100
               })}
-              placeholder="Usuário"
+              placeholder="Usuário/Link"
               hasError={!!errors?.username}
             />
             <Input

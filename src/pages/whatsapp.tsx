@@ -16,7 +16,6 @@ export default function Whatsapp() {
   interface IForm {
     phone: string;
     message: string;
-    userUrl: string;
   }
   const { user, setUser } = useContext(AuthContext);
 
@@ -38,18 +37,13 @@ export default function Whatsapp() {
     api.post(`/api/whatsapp/${user.id!}`, ...args);
   const postWhatsappApi = useApi(postWhatsapp);
 
-  const onSubmit: SubmitHandler<IForm> = async ({
-    message,
-    phone,
-    userUrl
-  }) => {
+  const onSubmit: SubmitHandler<IForm> = async ({ message, phone }) => {
     try {
       postWhatsappApi
         .request(
           {
             phone,
-            message,
-            userUrl
+            message
           },
           { withCredentials: true }
         )
@@ -125,10 +119,10 @@ export default function Whatsapp() {
         <>
           <h1>Crie seu link direto para o whatsapp</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              {...register('userUrl', { required: true })}
-              placeholder="digite a sua url"
-            />
+            <div>
+              <p>seu link:</p>
+              <p>{whatsappLink}</p>
+            </div>
             <Input
               {...register('phone', { required: true })}
               placeholder="digite o seu numero"

@@ -16,6 +16,10 @@ export const Container = styled.div`
   h1 {
     color: ${({ theme }) => theme.colors.text};
     font-size: 3.2rem;
+
+    &.success {
+      margin-bottom: 2rem;
+    }
   }
 
   form {

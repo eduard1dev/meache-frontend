@@ -28,6 +28,25 @@ export const Container = styled.div`
     width: 100%;
     max-width: 400px;
     background-color: ${({ theme }) => theme.colors.grey};
+
+    p {
+      font: ${({theme}) => theme.fonts.normal};
+    }
+
+    >div {
+      width: 100%;
+      text-align: left;
+
+      p:nth-of-type(1) {
+        font-size: 1.6rem;
+        margin: 0;
+      }
+
+      p:nth-of-type(2) {
+        color: ${({ theme }) => theme.colors.primary};
+        font-size: 1.8rem;
+      }
+    }
   }
 
   >div {
