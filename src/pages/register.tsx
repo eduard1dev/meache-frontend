@@ -103,6 +103,7 @@ export default function Whatsapp() {
                   clearErrors('password');
                 }
               }}
+              type="password"
             />
             {!!errors?.password && (
               <span role={'alert'}>

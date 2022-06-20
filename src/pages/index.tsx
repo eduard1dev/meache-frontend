@@ -8,6 +8,8 @@ import { GetServerSideProps } from 'next';
 import { api, getApiClient } from '../services/api';
 import { parseCookies } from 'nookies';
 import ReactLoading from 'react-loading';
+import Button from '../components/Button';
+import Link from 'next/link';
 
 export default function Whatsapp() {
   interface IForm {
@@ -45,16 +47,10 @@ export default function Whatsapp() {
           />
         </div>
         <div>
-          <button type="submit">
-            {postLoginApi.loading ? (
-              <ReactLoading type="spin" height={30} width={30} color="#000" />
-            ) : (
-              'Entrar'
-            )}
-          </button>
+          <Button loading={postLoginApi.loading} title="Entrar" />
           <p>
-            Não tem uma conta?{' '}
-            <a onClick={() => router.push('/register')}>Registre-se</a>
+            Não tem uma conta?
+            <Link href={'/register'}>Registre-se</Link>
           </p>
         </div>
       </form>

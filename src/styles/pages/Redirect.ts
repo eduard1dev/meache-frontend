@@ -9,7 +9,7 @@ export const Container = styled.div`
   height: 100vh;
 
   padding: 40px 32px 0;
-  color: #f0f0f0;
+  color: ${(props) => props.theme.colors.text};
 
   font: ${(props) => props.theme.fonts.normal};
   text-align: center;

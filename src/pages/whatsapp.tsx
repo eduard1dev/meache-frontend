@@ -8,6 +8,7 @@ import { api } from '../services/api';
 import { AuthContext } from '../contexts/AuthContext';
 import { CopyFilled } from '@ant-design/icons';
 import { WhatsappShareButton, WhatsappIcon } from 'react-share';
+import theme from '../styles/theme';
 
 import { toast } from 'react-toastify';
 import Loading from 'react-loading';
@@ -105,8 +106,8 @@ export default function Whatsapp() {
               <button>
                 <WhatsappShareButton title="Whatsapp" url={shareMessage}>
                   <WhatsappIcon
-                    bgStyle={{ fill: '#f8c630' }}
-                    iconFillColor="#121214"
+                    bgStyle={{ fill: theme.colors.primary }}
+                    iconFillColor={theme.colors.text_inner}
                     size={32}
                   />
                 </WhatsappShareButton>

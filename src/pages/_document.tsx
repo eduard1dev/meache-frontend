@@ -42,7 +42,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="pt">
         <Head>
-          <meta charSet="utf-8" />
+          <meta charSet="utf-8" name="O seu gerenciador de links" />
 
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link

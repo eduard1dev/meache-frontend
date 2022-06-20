@@ -3,6 +3,7 @@ import { useState, useReducer, FormEvent, useContext, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Container } from '../styles/pages/Home';
+import Button from '../components/Button';
 
 export default function Home() {
   const { user, isAuthenticated } = useContext(AuthContext);
@@ -17,21 +18,21 @@ export default function Home() {
           <h3>Meus Links</h3>
           {!!user?.hasWhatsappLink && (
             <Link href="/whatsapp">
-              <button>Meu link de whatsapp</button>
+              <Button title="Meu link de whatsapp" />
             </Link>
           )}
           <Link href="/userStats">
-            <button>Veja de onde estão acessando seu link!</button>
+            <Button title="Veja de onde estão acessando seu link!" />
           </Link>
         </section>
       )}
       <section className="section-add-buttons">
         {!user?.hasWhatsappLink && (
           <Link href="/whatsapp">
-            <button>Crie seu link direto para o whatsapp</button>
+            <Button title="Crie seu link direto para o whatsapp" />
           </Link>
         )}
-        <button>Crie sua pagina de contato (em breve...)</button>
+        <Button title="Crie sua pagina de contato (em breve...)" />
       </section>
     </Container>
   );

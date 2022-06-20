@@ -9,7 +9,7 @@ export const Container = styled.div`
   height: 100vh;
 
   padding: 0 32px 0;
-  color: #f0f0f0;
+  color: ${(props) => props.theme.colors.text};
 
   font: ${(props) => props.theme.fonts.normal};
   text-align: center;
@@ -68,7 +68,7 @@ export const Container = styled.div`
       border: none;
       font: ${({theme}) => theme.fonts.normal};
       font-size: 1.8rem;
-      color: #f0f0f0;
+      color: ${({theme}) => theme.colors.text};
       margin-bottom: 28px;
     }
 

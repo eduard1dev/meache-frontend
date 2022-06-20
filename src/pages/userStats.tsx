@@ -64,7 +64,7 @@ export default function Home() {
   return (
     <Container>
       {getUserStatsApi.loading ? (
-        <ReactLoading type="spin" />
+        <ReactLoading type="spin" color={theme.colors.text} />
       ) : (
         <section>
           <h1>
@@ -89,7 +89,8 @@ export default function Home() {
                     borderRadius: 8,
                     backgroundColor: theme.colors.primary,
                     fontFamily: theme.fonts.strong,
-                    fontSize: 16
+                    fontSize: 16,
+                    color: theme.colors.text_inner
                   }
                 },
                 rows: {

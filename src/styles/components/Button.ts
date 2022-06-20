@@ -16,7 +16,7 @@ export const Button = styled.button`
     border: none;
     outline: none;
 
-    color: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text_inner};
     font: ${({ theme }) => theme.fonts.strong};
     font-size: 1.8rem;
 `;

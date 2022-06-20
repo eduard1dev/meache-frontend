@@ -41,6 +41,7 @@ export const Container = styled.div`
       font: ${(props) => props.theme.fonts.strong};
       font-size: 1.6rem;
       cursor: pointer;
+      color: ${({theme}) => theme.colors.text_inner};
     }
   }
 
@@ -55,7 +56,7 @@ export const Container = styled.div`
     background-color: ${(props) => props.theme.colors.grey};
     text-align: left;
     margin-bottom: 60px;
-    color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.text};
 
     button {
       height: 60px;
@@ -69,6 +70,7 @@ export const Container = styled.div`
       border: none;
       font: ${(props) => props.theme.fonts.strong};
       font-size: 1.6rem;
+      color: ${(props) => props.theme.colors.text_inner};
     }
   }
 `;

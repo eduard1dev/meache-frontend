@@ -9,7 +9,7 @@ export const Container = styled.div`
   height: 100vh;
 
   padding: 0 32px 0;
-  color: #f0f0f0;
+  color: ${({ theme }) => theme.colors.text};;
 
   text-align: center;
 
@@ -52,7 +52,7 @@ export const Container = styled.div`
       border: none;
       outline: none;
 
-      color: ${({ theme }) => theme.colors.background};
+      color: ${({ theme }) => theme.colors.text_inner};
       font: ${({ theme }) => theme.fonts.strong};
       font-size: 1.8rem;
       text-transform: uppercase;
@@ -61,6 +61,7 @@ export const Container = styled.div`
     a {
       color: ${({ theme }) => theme.colors.primary};
       cursor: pointer;
+      margin-left: 1rem;
     }
   }
 `;

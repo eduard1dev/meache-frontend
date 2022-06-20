@@ -10,7 +10,6 @@ export const useApi = (
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  console.log(error);
 
   const request = async (data?: any, config?: AxiosRequestConfig<any>) => {
     setLoading(true);

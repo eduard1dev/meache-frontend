@@ -2,6 +2,7 @@ import { HeaderContainer } from '../styles/components/Layout';
 import { LeftCircleFilled } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import { useAuth } from '../contexts/useAuth';
+import { useMemo } from 'react';
 
 interface IHeader {
   children: React.ReactNode;
@@ -14,12 +15,21 @@ export default function Header({ children }: IHeader) {
     router.back();
   };
 
+  const shouldShowGoBackButton = useMemo(
+    () =>
+      router.asPath !== '/' &&
+      router.asPath !== '/home' &&
+      !router.asPath.includes('/r/') &&
+      router.asPath !== '/verify',
+    [router.asPath]
+  );
+
   const { handleLogout, isAuthenticated } = useAuth();
 
   return (
     <>
       <HeaderContainer>
-        {router.asPath !== '/' && router.asPath !== '/home' && (
+        {shouldShowGoBackButton && (
           <LeftCircleFilled className="back_icon" onClick={handleGoBack} />
         )}
         <a href="/">meache</a>
