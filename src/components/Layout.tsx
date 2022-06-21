@@ -20,7 +20,7 @@ export default function Header({ children }: IHeader) {
       router.asPath !== '/' &&
       router.asPath !== '/home' &&
       !router.asPath.includes('/r/') &&
-      router.asPath !== '/verify',
+      !router.asPath.includes('/verify'),
     [router.asPath]
   );
 
