@@ -37,7 +37,7 @@ export const Container = styled.div`
       ${({ theme }) => theme.gap_column(0.6)};
     }
 
-    >a {
+    a {
       color: ${({ theme }) => theme.colors.primary};
       cursor: pointer;
       margin-left: 1rem;
