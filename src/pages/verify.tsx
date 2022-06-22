@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 import { api } from '../services/api';
 import { useApi } from '../hooks/useApi';
 import ReactLoading from 'react-loading';
+import theme from '../styles/theme';
 
 export default function Whatsapp() {
   const router = useRouter();
-  const [isLoading, setLoading] = useState(true);
 
   const { id } = router.query;
 
@@ -23,12 +23,12 @@ export default function Whatsapp() {
 
   return (
     <Container>
-      {isLoading ? (
+      {putVerifyUserApi.loading || !id || putVerifyUserApi.error ? (
         <ReactLoading
           type="spinningBubbles"
           height={100}
           width={100}
-          color="#fff"
+          color={theme.colors.text}
         />
       ) : (
         <h1>Obrigado por verificar seu email!</h1>
