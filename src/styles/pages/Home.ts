@@ -27,8 +27,9 @@ export const Container = styled.div`
   section.section-add-buttons {
     display: flex;
     flex-direction: column;
-    gap: 20px;
     width: 100%;
+
+    ${({theme}) => theme.flex_gap(2)}
 
     button {
       height: 60px;
@@ -48,7 +49,7 @@ export const Container = styled.div`
   section.section-edit-buttons {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    ${({theme}) => theme.flex_gap(2)}
     width: 100%;
     border-top: solid ${(props) => props.theme.colors.primary} 2px;
     border-radius: 6px;

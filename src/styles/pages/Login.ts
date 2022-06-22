@@ -24,16 +24,19 @@ export const Container = styled.div`
     margin: 25px 0;
     padding: 28px;
     border-radius: 6px;
-    gap: 20px;
     width: 100%;
     max-width: 400px;
     background-color: ${({ theme }) => theme.colors.grey};
     font-size: 1.6rem;
 
-    div {
+    div:nth-of-type(1) {
       display: flex;
-      gap: 6px;
       flex-direction: column;
+      margin-bottom: 2rem;
+
+      * + * {
+        margin-top: 0.6rem;
+      }
     }
 
     button {
