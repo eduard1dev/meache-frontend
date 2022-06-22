@@ -31,6 +31,7 @@ export default function Whatsapp() {
     if (!!user) router.push('/Home');
   }, [user]); */
 
+  console.log('login', process.env.REACT_ENV);
   return (
     <Container>
       <h1>Acesse sua conta</h1>
