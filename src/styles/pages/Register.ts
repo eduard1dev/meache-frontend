@@ -28,14 +28,14 @@ export const Container = styled.div`
     margin: 25px 0;
     padding: 28px;
     border-radius: 6px;
-    ${({theme}) => theme.flex_gap(2)}
+    ${({theme}) => theme.gap_column(2)}
     width: 100%;
     max-width: 400px;
     background-color: ${({ theme }) => theme.colors.grey};
 
     div {
       display: flex;
-      ${({theme}) => theme.flex_gap(0.6)}
+      ${({theme}) => theme.gap_column(0.6)}
       flex-direction: column;
     }
 

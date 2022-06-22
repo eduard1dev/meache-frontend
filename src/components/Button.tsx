@@ -12,12 +12,14 @@ export default function Button({ loading, title, ...rest }: IButton) {
   return (
     <S.Button {...rest}>
       {loading ? (
-        <ReactLoading
-          type="spin"
-          height={30}
-          width={30}
-          color={theme.colors.text_inner}
-        />
+        <>
+          <ReactLoading
+            type="spin"
+            height={30}
+            width={30}
+            color={theme.colors.text_inner}
+          />
+        </>
       ) : (
         title
       )}

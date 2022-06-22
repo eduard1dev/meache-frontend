@@ -30,7 +30,7 @@ export const Container = styled.div`
     width: 100%;
     align-items: center;
     padding: 8px 12px 28px;
-    ${({theme}) => theme.flex_gap(2.4)}
+    ${({theme}) => theme.gap_column(2.4)}
     
     border-top: solid ${(props) => props.theme.colors.primary} 2px;
     border-radius: 6px;

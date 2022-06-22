@@ -13,7 +13,8 @@ const theme = {
     strong: '600 1rem Open Sans, sans-serif',
     logo: '400 3.5rem Pacifico, cursive;'
   },
-  flex_gap: (value) => `* + * { margin-top: ${value}rem }`
+  gap_column: (value) => `> * + * { margin-top: ${value}rem }`,
+  gap_row: (value) => `> * + * { margin-left: ${value}rem }`
 };
 
 export default theme;
