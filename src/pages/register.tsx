@@ -1,4 +1,4 @@
-import { useState, useReducer, FormEvent, useEffect } from 'react';
+import { useState, useReducer, FormEvent, useEffect, useCallback } from 'react';
 import { Container } from '../styles/pages/Register';
 import { Input } from '../styles/components/Input';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -109,8 +109,8 @@ export default function Whatsapp() {
               <span role={'alert'}>
                 Sua senha deve conter:
                 <br />- De 8 a 100 caracteres;
-                <br />- Pelo menos uma letra maiuscula e minuscula;
-                <br />- Pelo menos 1 número;
+                <br />- Pelo menos uma letra maiúscula e minúscula;
+                <br />- Pelo menos um número;
                 <br />- Pelo menos um caractere especial.
               </span>
             )}
