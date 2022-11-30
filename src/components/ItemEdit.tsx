@@ -17,6 +17,10 @@ interface ItemEditProps {
   onChangeText: (text: string, index: number) => void;
   removeItem: (index: number) => void;
   itemType: 'link' | 'title';
+  colorTheme?: {
+    primary: string;
+    secondary: string;
+  };
 }
 
 interface TitleItemProps {
@@ -38,10 +42,10 @@ function TitleItem({ index, name, onChangeText, removeItem }: TitleItemProps) {
   );
 }
 
-function LinkItem({ name, removeItem, index }) {
+function LinkItem({ name, removeItem, index, colorTheme }) {
   return (
     <>
-      <S.LinkItemContainer>{name}</S.LinkItemContainer>
+      <S.LinkItemContainer colorTheme={colorTheme}>{name}</S.LinkItemContainer>
       <S.ButtonRemoveItem onClick={() => removeItem(index)} title="X" />
     </>
   );
@@ -124,7 +128,7 @@ export default function ItemEdit({
 
   const item = {
     title: TitleItem({ index, name, onChangeText, removeItem }),
-    link: LinkItem({ name, removeItem, index })
+    link: LinkItem({ name, removeItem, index, colorTheme })
   };
 
   return (

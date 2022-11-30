@@ -5,6 +5,10 @@ interface ItemContainer {
   isDragging: boolean;
 }
 
+interface LinkItemContainerProps {
+  colorTheme?: { primary: string; secondary: string };
+}
+
 export const TitleItemContainer = styled.input`
   display: flex;
   background-color: 'transparent';
@@ -21,7 +25,7 @@ export const TitleItemContainer = styled.input`
   color: black;
 `;
 
-export const LinkItemContainer = styled.div`
+export const LinkItemContainer = styled.div<LinkItemContainerProps>`
   display: flex;
   background-color: ${(props) => props.theme.colors.primary};
   width: 100%;
