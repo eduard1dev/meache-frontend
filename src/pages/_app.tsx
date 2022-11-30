@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../components/Layout';
 
 import Head from 'next/head';
+import { ModalProvider } from '../contexts/ModalContext';
 
 export default function App({ Component, pageProps }) {
   return (
@@ -17,7 +18,9 @@ export default function App({ Component, pageProps }) {
       <AuthProvider>
         <ThemeProvider theme={theme}>
           <Layout>
-            <Component {...pageProps} />
+            <ModalProvider>
+              <Component {...pageProps} />
+            </ModalProvider>
             <ToastContainer />
           </Layout>
           <GlobalStyle />

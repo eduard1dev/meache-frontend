@@ -12,20 +12,21 @@ export default function Home() {
 
   return (
     <Container>
-      <h1>Bem vindo ao seu dashboard</h1>
-      {user?.hasWhatsappLink && (
-        <section className="section-edit-buttons">
-          <h3>Meus Links</h3>
-          {!!user?.hasWhatsappLink && (
-            <Link href="/whatsapp">
-              <Button title="Meu link de whatsapp" />
-            </Link>
-          )}
-          <Link href="/userStats">
-            <Button title="Veja de onde estão acessando seu link!" />
+      <section className="section-edit-buttons">
+        <h3>Meus Links</h3>
+        <Link href="/redirect/edit">
+          <Button title="Página de links" />
+        </Link>
+        {!!user?.hasWhatsappLink && (
+          <Link href="/whatsapp">
+            <Button title="Meu link de whatsapp" />
           </Link>
-        </section>
-      )}
+        )}
+        <Link href="/userStats">
+          <Button title="Veja de onde estão acessando seu link!" />
+        </Link>
+      </section>
+
       <section className="section-add-buttons">
         {!user?.hasWhatsappLink && (
           <Link href="/whatsapp">

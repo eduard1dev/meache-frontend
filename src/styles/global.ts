@@ -15,12 +15,12 @@ export default createGlobalStyle`
     background: ${(props) => props.theme.colors.background};
     color: ${(props) => props.theme.colors.text};
     font: ${(props) => props.theme.fonts.normal};
-    height: 100vh;
+    height: 100%;
     width: 100vw;
   }
 
   main {
-    height: 100vh;
+    height: 100%;
     max-width: 100vw;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@ export default createGlobalStyle`
     }
   }
 
-  button {
+  button, a {
     cursor: pointer
   }
 

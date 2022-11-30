@@ -17,7 +17,7 @@ interface IUser {
   hasWhatsappLink: boolean;
   id: string;
   whatsappLink: URL;
-  userLinks: URL[];
+  userLinks: any[];
   userUrl: string;
 }
 
@@ -84,28 +84,30 @@ export const AuthProvider = ({ children }) => {
   const getUser = () => api.get('/api/user');
   const getUserApi = useApi(getUser);
 
-  const getUserData = () => {
-    getUserApi.request().then((data) => {
-      setUser({ ...user, ...data });
-    });
-  };
-
-  useEffect(() => {
+  const getUserData = async () => {
     const { 'nextauth.token': token } = parseCookies();
 
-    if (token) {
-      getUserData();
+    if (token && route.asPath === '/home') {
+      await getUserApi.request().then((data) => {
+        setUser({ ...user, ...data });
+        console.log(data);
+      });
     }
 
     if (
       token ||
       route.asPath.includes('verify') ||
-      route.asPath == '/r/[userUrl]'
+      route.asPath === '/r/[userUrl]' ||
+      route.asPath.includes('/redirect')
     ) {
       console.log(token, 'verify', route.asPath);
     } else {
       route.push('/');
     }
+  };
+
+  useEffect(() => {
+    getUserData();
   }, []);
 
   return (

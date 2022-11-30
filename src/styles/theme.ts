@@ -5,7 +5,10 @@ const theme = {
     text: '#000',
     text_inner: '#fff',
     primary: '#0085FF',
-    error: '#cc0000'
+    error: '#cc0000',
+    links: {
+      purple: { background: '#EFEAFB', font: '#2D01FF' }
+    }
   },
   fonts: {
     light: '300 1rem Open Sans, sans-serif',
