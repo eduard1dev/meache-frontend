@@ -58,7 +58,8 @@ export default function ItemEdit({
   name,
   onChangeText,
   removeItem,
-  itemType
+  itemType,
+  colorTheme
 }: ItemEditProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [{ handlerId }, drop] = useDrop<
