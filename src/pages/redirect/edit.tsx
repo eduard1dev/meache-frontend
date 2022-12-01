@@ -1,5 +1,4 @@
 import { useReducer, useEffect, useCallback, useContext } from 'react';
-import { useRouter } from 'next/router';
 import { BlockPicker } from 'react-color';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -80,7 +79,6 @@ export default function Redirect() {
       toogleSaveLoading();
     }
   }
-  console.log(user.userLinks);
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -91,7 +89,7 @@ export default function Redirect() {
               index={index}
               id={index}
               moveCard={moveCard}
-              key={index.toString()}
+              key={item._id}
               itemType={item.itemType}
               name={item.name}
               onChangeText={onChangeText}

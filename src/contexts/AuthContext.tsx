@@ -102,18 +102,17 @@ export const AuthProvider = ({ children }) => {
     if (token && route.asPath === '/home') {
       await getUserApi.request().then((data) => {
         setUser({ ...user, ...data });
-        console.log(data);
       });
     }
 
     if (
-      token ||
-      route.asPath.includes('verify') ||
-      route.asPath === '/r/[userUrl]' ||
-      route.asPath.includes('/redirect')
+      !(
+        token ||
+        route.asPath.includes('verify') ||
+        route.asPath === '/r/[userUrl]' ||
+        route.asPath.includes('/redirect')
+      )
     ) {
-      console.log(token, 'verify', route.asPath);
-    } else {
       route.push('/');
     }
   };
