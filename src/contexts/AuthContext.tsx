@@ -17,7 +17,7 @@ interface IUser {
   hasWhatsappLink: boolean;
   id: string;
   whatsappLink: URL;
-  userLinks: any[];
+  userLinks: UserLinkProps[];
   userUrl: string;
 }
 
@@ -35,11 +35,23 @@ interface IAuthContext {
   postLoginApi: ReturnType<typeof useApi>;
 }
 
+export interface UserLinkProps {
+  name: string;
+  link: string;
+  animation?: 'shake' | 'color';
+  colorTheme?: {
+    primary: string;
+    secondary: string;
+  };
+  itemType: 'title' | 'link';
+  _id: string;
+}
+
 export const AuthContext = createContext({} as IAuthContext);
 
 export const AuthProvider = ({ children }) => {
   const route = useRouter();
-  const [user, setUser] = useState<IUser>({} as IUser);
+  const [user, setUser] = useState<IUser>({ userLinks: [] } as IUser);
 
   const postLogin = (...args: any) => api.post('/api/auth/login', ...args);
   const postLoginApi = useApi(postLogin);
