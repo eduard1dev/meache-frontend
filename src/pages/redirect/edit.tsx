@@ -90,6 +90,7 @@ export default function Redirect() {
   return (
     <DndProvider backend={isMobile.current ? TouchBackend : HTML5Backend}>
       <S.Container>
+        <p>{isMobile.current ? 'mobile' : 'desktop'}</p>
         <S.ItemsContainer>
           {user.userLinks.map((item, index) => (
             <ItemEdit
