@@ -6,7 +6,7 @@ export const getApiClient = (ctx?: any) => {
   const api = axios.create({
     baseURL:
       process.env.NEXT_PUBLIC_REACT_ENV == 'production'
-        ? 'https://meache-api.ed1labs.xyz/'
+        ? 'https://meache-backend.onrender.com/'
         : 'http://localhost:5001'
   });
 
