@@ -1,12 +1,4 @@
-import {
-  useState,
-  useReducer,
-  FormEvent,
-  useEffect,
-  useCallback,
-  useContext
-} from 'react';
-import { useRouter } from 'next/router';
+import { useReducer, useEffect, useCallback, useContext } from 'react';
 import { BlockPicker } from 'react-color';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -18,103 +10,86 @@ import Button from '../../components/Button';
 import { GetServerSideProps } from 'next';
 import { api } from '../../services/api';
 import { parseCookies } from 'nookies';
-import { AuthContext } from '../../contexts/AuthContext';
-import { useModalContext } from '../../contexts/ModalContext';
+import { AuthContext, UserLinkProps } from '../../contexts/AuthContext';
 import { Input } from '../../styles/components/Input';
 import { useForm, SubmitHandler, set } from 'react-hook-form';
-import { useApi } from '../../hooks/useApi';
 
-interface ItemButtonResponseProps {
-  name: string;
-  link: string;
-  animation?: 'shake' | 'color';
-  colorTheme?: {
-    primary: string;
-    secondary: string;
-  };
-  id: number;
-  itemType: 'title' | 'link';
-}
-
-interface EditItemFormProps extends ItemButtonResponseProps {}
+interface EditItemFormProps extends UserLinkProps {}
 
 export default function Redirect() {
-  const router = useRouter();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
-    unregister
-  } = useForm<EditItemFormProps>();
+    watch
+  } = useForm<EditItemFormProps>({ defaultValues: { itemType: 'title' } });
 
   const watchType = watch('itemType', 'title');
-
-  const [items, setItems] = useState<ItemButtonResponseProps[]>([]);
 
   const { user, setUser } = useContext(AuthContext);
 
   const [editMode, toogleEditMode] = useReducer((s) => !s, false);
 
-  useEffect(() => {
-    if (items.length < 1) setItems(user.userLinks);
-  }, []);
+  const [isSaveLoading, toogleSaveLoading] = useReducer((s) => !s, false);
 
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
-    setItems(
+    setUser(
       produce((draft) => {
-        const dragged = draft[dragIndex];
-        draft.splice(dragIndex, 1);
-        draft.splice(hoverIndex, 0, dragged);
+        const dragged = draft.userLinks[dragIndex];
+        draft.userLinks.splice(dragIndex, 1);
+        draft.userLinks.splice(hoverIndex, 0, dragged);
       })
     );
   }, []);
 
   const onChangeText = useCallback((text: string, index: number) => {
-    setItems(
+    setUser(
       produce((draft) => {
-        draft[index].name = text;
+        draft.userLinks[index].name = text;
       })
     );
   }, []);
 
   const removeItem = useCallback((index: number) => {
-    setItems(
+    setUser(
       produce((draft) => {
-        draft.splice(index, 1);
+        draft.userLinks.splice(index, 1);
       })
     );
   }, []);
 
-  const addItem: SubmitHandler<EditItemFormProps> = async (item) => {
+  const addItem: SubmitHandler<EditItemFormProps> = useCallback((item) => {
+    setUser(
+      produce((draft) => {
+        draft.userLinks.push(item);
+      })
+    );
+  }, []);
+
+  async function saveItems() {
+    toogleSaveLoading();
     try {
       const response = await api.put(
         `/api/user/${user.id}`,
-        { userLinks: [...items, item] },
+        { userLinks: user.userLinks },
         { withCredentials: true }
       );
-
-      setUser((s) => {
-        return { ...s, userLinks: [...items, item] };
-      });
-
-      setItems([...items, item]);
+      toogleSaveLoading();
     } catch (err) {
-      console.log(err);
+      toogleSaveLoading();
     }
-  };
+  }
 
   return (
     <DndProvider backend={HTML5Backend}>
       <S.Container>
         <S.ItemsContainer>
-          {items.map((item, index) => (
+          {user.userLinks.map((item, index) => (
             <ItemEdit
               index={index}
-              id={item.id}
+              id={index}
               moveCard={moveCard}
-              key={index.toString()}
+              key={item._id}
               itemType={item.itemType}
               name={item.name}
               onChangeText={onChangeText}
@@ -126,20 +101,20 @@ export default function Redirect() {
           <S.AddItemFormContainer>
             <form onSubmit={handleSubmit(addItem)}>
               <div>
-                <label htmlFor="itemType">Título</label>
                 <input
                   {...register('itemType', { required: true })}
                   type="radio"
                   value="title"
                   id="field-title"
                 />
-                <label htmlFor="itemType">Link</label>
+                <label htmlFor="field-title">Título</label>
                 <input
                   {...register('itemType', { required: true })}
                   type="radio"
                   value="link"
                   id="field-link"
                 />
+                <label htmlFor="field-link">Link</label>
               </div>
               <Input
                 {...register('name', { required: true })}
@@ -152,7 +127,8 @@ export default function Redirect() {
                     {...register('link', { required: true })}
                   />
                   <select
-                    placeholder=""
+                    defaultValue=""
+                    placeholder="animation"
                     {...register('animation', { required: true })}
                   >
                     <option value="" disabled selected>
@@ -170,9 +146,13 @@ export default function Redirect() {
         <Button
           title={!editMode ? 'Adicionar' : 'Cancelar'}
           onClick={() => toogleEditMode()}
-        >
-          Adicionar novo item
-        </Button>
+        />
+        <Button
+          title="Salvar"
+          onClick={() => saveItems()}
+          disabled={isSaveLoading}
+          loading={isSaveLoading}
+        />
       </S.Container>
     </DndProvider>
   );

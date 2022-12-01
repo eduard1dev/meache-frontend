@@ -9,8 +9,6 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
 
-  gap: 42px;
-
   padding: 100px 32px;
   color: ${(props) => props.theme.colors.text};
 
@@ -27,6 +25,8 @@ export const ItemsContainer = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 12px;
+
+  margin-bottom: 32px;
 `;
 
 export const AddItemFormContainer = styled.div`
@@ -49,21 +49,38 @@ export const AddItemFormContainer = styled.div`
     > div {
       display: flex;
       flex-direction: row;
-      padding: 12px;
-
-      background-color: ${({ theme }) => theme.colors.grey};
 
       label {
+        display: flex;
+        align-items: center;
         font: ${({ theme }) => theme.fonts.normal};
         font-size: 1.6rem;
-        margin-right: 6px;
+        background-color: #ddd;
+        padding: 10px 20px;
+        font-family: sans-serif, Arial;
+        font-size: 16px;
+        border-radius: 4px;
+        height: 52px;
+        margin-right: 12px;
+
+        color: ${({ theme }) => theme.colors.text_inner};
       }
 
-      input {
+      input[type='radio'] {
+        display: none;
+      }
+
+      input[type='radio'] + label {
+        background-color: ${({ theme }) => theme.colors.grey};
+        color: ${({ theme }) => theme.colors.primary};
+      }
+
+      input[type='radio']:checked + label {
         background-color: ${({ theme }) => theme.colors.primary};
-        margin-right: auto;
+        color: ${({ theme }) => theme.colors.text_inner};
       }
     }
+
     select {
       background-color: ${({ theme }) => theme.colors.grey};
       padding: 12px;
