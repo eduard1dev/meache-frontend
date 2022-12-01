@@ -99,7 +99,7 @@ export const AuthProvider = ({ children }) => {
   const getUserData = async () => {
     const { 'nextauth.token': token } = parseCookies();
 
-    if (token && route.asPath === '/home') {
+    if (token) {
       await getUserApi.request().then((data) => {
         setUser({ ...user, ...data });
       });

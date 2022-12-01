@@ -1,7 +1,8 @@
-import { useReducer, useEffect, useCallback, useContext } from 'react';
+import { useReducer, useEffect, useCallback, useContext, useRef } from 'react';
 import { BlockPicker } from 'react-color';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 import { produce } from 'immer';
 
 import * as S from '../../styles/pages/Redirect/Edit';
@@ -17,6 +18,12 @@ import { useForm, SubmitHandler, set } from 'react-hook-form';
 interface EditItemFormProps extends UserLinkProps {}
 
 export default function Redirect() {
+  const isMobile = useRef<boolean>(false);
+
+  useEffect(() => {
+    isMobile.current = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -81,7 +88,7 @@ export default function Redirect() {
   }
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={isMobile.current ? TouchBackend : HTML5Backend}>
       <S.Container>
         <S.ItemsContainer>
           {user.userLinks.map((item, index) => (
