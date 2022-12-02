@@ -91,7 +91,7 @@ export default function Redirect() {
   }
 
   return (
-    <DndProvider backend={TouchBackend}>
+    <DndProvider backend={isMobile.current ? TouchBackend : HTML5Backend}>
       <S.Container>
         <p>{isMobile.current ? 'mobile' : 'desktop'}</p>
         <S.ItemsContainer>
