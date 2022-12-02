@@ -21,7 +21,10 @@ export default function Redirect() {
   const isMobile = useRef<boolean>(false);
 
   useEffect(() => {
-    isMobile.current = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    isMobile.current =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
+        navigator.userAgent
+      );
   }, []);
 
   const {
