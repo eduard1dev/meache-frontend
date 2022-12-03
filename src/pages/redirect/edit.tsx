@@ -1,4 +1,11 @@
-import { useReducer, useEffect, useCallback, useContext, useRef } from 'react';
+import {
+  useReducer,
+  useEffect,
+  useCallback,
+  useContext,
+  useRef,
+  useState
+} from 'react';
 import { BlockPicker } from 'react-color';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -18,13 +25,15 @@ import { useForm, SubmitHandler, set } from 'react-hook-form';
 interface EditItemFormProps extends UserLinkProps {}
 
 export default function Redirect() {
-  const isMobile = useRef<boolean>(false);
+  const [isMobile, setMobile] = useState(false);
 
   useEffect(() => {
-    isMobile.current =
+    const isMobile =
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
         navigator.userAgent
       );
+
+    setMobile(isMobile);
   }, []);
 
   const {
@@ -91,9 +100,9 @@ export default function Redirect() {
   }
 
   return (
-    <DndProvider backend={isMobile.current ? TouchBackend : HTML5Backend}>
+    <DndProvider backend={isMobile ? TouchBackend : HTML5Backend}>
       <S.Container>
-        <p>{isMobile.current ? 'mobile' : 'desktop'}</p>
+        <p>{isMobile ? 'mobile' : 'desktop'}</p>
         <S.ItemsContainer>
           {user.userLinks.map((item, index) => (
             <ItemEdit
