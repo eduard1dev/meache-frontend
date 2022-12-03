@@ -24,18 +24,7 @@ import { useForm, SubmitHandler, set } from 'react-hook-form';
 
 interface EditItemFormProps extends UserLinkProps {}
 
-export default function Redirect() {
-  const [isMobile, setMobile] = useState(false);
-
-  useEffect(() => {
-    const isMobile =
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
-        navigator.userAgent
-      );
-
-    setMobile(isMobile);
-  }, []);
-
+export default function Redirect({ isMobile }) {
   const {
     register,
     handleSubmit,
@@ -180,6 +169,15 @@ export default function Redirect() {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { ['nextauth.token']: token } = parseCookies(ctx);
+  let isMobile = false;
+
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
+      ctx.req.headers['user-agent']
+    )
+  ) {
+    isMobile = true;
+  }
 
   if (!token) {
     return {
@@ -190,5 +188,5 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
-  return { props: {} };
+  return { props: { isMobile } };
 };
