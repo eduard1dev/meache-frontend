@@ -9,7 +9,6 @@ import { useRouter } from 'next/router';
 import { api } from '../services/api';
 import { SubmitHandler } from 'react-hook-form';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
-import { toast } from 'react-toastify';
 import { useApi } from '../hooks/useApi';
 
 interface IUser {
@@ -79,7 +78,7 @@ export const AuthProvider = ({ children }) => {
 
           setUser({ ...user, ...data });
 
-          route.push('/home');
+          route.push('/d/home');
         }
       });
   };

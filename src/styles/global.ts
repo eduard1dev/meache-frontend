@@ -22,17 +22,16 @@ export default createGlobalStyle`
   main {
     height: 100%;
     max-width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-     
-    >div {
-      max-width: 720px;
-      flex: 1;
+
+    > div {
+      margin: 0 auto;
+      width: 100%;
+      max-width: 1080px;
     }
   }
 
   button, a {
+    text-decoration: none;
     cursor: pointer
   }
 

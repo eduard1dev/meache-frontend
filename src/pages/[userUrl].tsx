@@ -1,13 +1,13 @@
 import { useState, useReducer, FormEvent, useEffect, useContext } from 'react';
-import { LinkButtonProps } from '../../components/LinkButton';
+import { LinkButtonProps } from '../components/LinkButton';
 import { useRouter } from 'next/router';
 import { BlockPicker } from 'react-color';
-import LinkButton from '../../components/LinkButton';
+import LinkButton from '../components/LinkButton';
 
-import { Container } from '../../styles/pages/Redirect';
-import { AuthContext } from '../../contexts/AuthContext';
-import { useApi } from '../../hooks/useApi';
-import { api, getApiClient } from '../../services/api';
+import { Container } from '../styles/pages/Redirect';
+import { AuthContext } from '../contexts/AuthContext';
+import { useApi } from '../hooks/useApi';
+import { api, getApiClient } from '../services/api';
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
 
@@ -34,7 +34,6 @@ export default function Redirect({ userLinks }) {
 
   return (
     <Container>
-      <h1 className="username">ED1 produções</h1>
       {links.map((item, index) => (
         <LinkButton
           href={item.link}
@@ -51,7 +50,7 @@ export default function Redirect({ userLinks }) {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   let userLinks = null;
 
-  const response = await api.get(`/api/user/${ctx.query.id}`);
+  const response = await api.get(`/api/user/${ctx.resolvedUrl}`);
   userLinks = response.data.userLinks;
 
   return { props: { userLinks } };

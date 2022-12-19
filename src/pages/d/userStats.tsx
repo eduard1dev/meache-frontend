@@ -7,12 +7,12 @@ import {
   useEffect,
   useMemo
 } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
-import { api } from '../services/api';
-import { useApi } from '../hooks/useApi';
+import { AuthContext } from '../../contexts/AuthContext';
+import { api } from '../../services/api';
+import { useApi } from '../../hooks/useApi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ReactLoading from 'react-loading';
-import { Container } from '../styles/pages/UserStats';
+import { Container } from '../../styles/pages/UserStats';
 import { useTheme } from 'styled-components';
 import DataTable from 'react-data-table-component';
 

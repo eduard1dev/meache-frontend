@@ -2,16 +2,49 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
   height: 100vh;
 
-  padding: 0 32px 0;
-  color: ${({ theme }) => theme.colors.text};;
+  color: ${({ theme }) => theme.colors.text};
 
   text-align: center;
+
+  @media (max-width: 860px) {
+    flex-direction: column;
+  }
+
+  aside {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &:first-of-type {
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(red, transparent),
+          linear-gradient(to top left, lime, transparent),
+          linear-gradient(to top right, blue, transparent);
+        background-blend-mode: screen;
+        z-index: -1;
+
+        @media (max-width: 860px) {
+          width: 100%;
+          height: 50%;
+        }
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+    }
+  }
 
   h1 {
     color: ${({ theme }) => theme.colors.text};
@@ -29,7 +62,7 @@ export const Container = styled.div`
     background-color: ${({ theme }) => theme.colors.grey};
     font-size: 1.6rem;
 
-    >div:nth-of-type(1) {
+    > div:nth-of-type(1) {
       display: flex;
       flex-direction: column;
       margin-bottom: 2rem;

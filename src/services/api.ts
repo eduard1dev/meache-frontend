@@ -7,7 +7,7 @@ export const getApiClient = (ctx?: any) => {
     baseURL:
       process.env.NEXT_PUBLIC_REACT_ENV == 'production'
         ? 'https://meache-backend.onrender.com/'
-        : 'http://localhost:5001'
+        : 'http://localhost:5000'
   });
 
   if (token) {

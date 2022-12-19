@@ -18,6 +18,10 @@ export const Container = styled.div`
   h1.username {
     margin-bottom: 50px;
   }
+
+  button {
+    margin-bottom: 6px;
+  }
 `;
 
 export const ItemsContainer = styled.div`

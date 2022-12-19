@@ -18,7 +18,8 @@ export default function Header({ children }: IHeader) {
   const shouldShowGoBackButton = useMemo(
     () =>
       router.asPath !== '/' &&
-      router.asPath !== '/home' &&
+      router.pathname !== '/[userUrl]' &&
+      router.asPath !== '/d/home' &&
       !router.asPath.includes('/r/') &&
       !router.asPath.includes('/verify'),
     [router.asPath]

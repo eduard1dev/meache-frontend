@@ -1,11 +1,11 @@
 import { useState, useReducer, FormEvent, useEffect, useCallback } from 'react';
-import { Container } from '../styles/pages/Register';
-import { Input } from '../styles/components/Input';
+import { Container } from '../../styles/pages/Register';
+import { Input } from '../../styles/components/Input';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { api } from '../services/api';
-import { useApi } from '../hooks/useApi';
-import Button from '../components/Button';
+import { api } from '../../services/api';
+import { useApi } from '../../hooks/useApi';
+import Button from '../../components/Button';
 
 export default function Whatsapp() {
   interface IForm {

@@ -1,10 +1,7 @@
 import {
   useReducer,
-  useEffect,
   useCallback,
   useContext,
-  useRef,
-  useState
 } from 'react';
 import { BlockPicker } from 'react-color';
 import { DndProvider } from 'react-dnd';
@@ -91,7 +88,6 @@ export default function Redirect({ isMobile }) {
   return (
     <DndProvider backend={isMobile ? TouchBackend : HTML5Backend}>
       <S.Container>
-        <p>{isMobile ? 'mobile' : 'desktop'}</p>
         <S.ItemsContainer>
           {user.userLinks.map((item, index) => (
             <ItemEdit
