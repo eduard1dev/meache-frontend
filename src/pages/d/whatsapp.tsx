@@ -1,17 +1,16 @@
-import { useState, useContext, useEffect, useMemo } from 'react';
-import { Container } from '../styles/pages/Whatsapp';
-import { Input } from '../styles/components/Input';
-import Button from '../components/Button';
+import { useContext, useEffect, useMemo } from 'react';
+import { Container } from '../../styles/pages/Whatsapp';
+import { Input } from '../../styles/components/Input';
+import Button from '../../components/Button';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useApi } from '../hooks/useApi';
-import { api } from '../services/api';
-import { AuthContext } from '../contexts/AuthContext';
+import { useApi } from '../../hooks/useApi';
+import { api } from '../../services/api';
+import { AuthContext } from '../../contexts/AuthContext';
 import { CopyFilled } from '@ant-design/icons';
 import { WhatsappShareButton, WhatsappIcon } from 'react-share';
-import theme from '../styles/theme';
+import theme from '../../styles/theme';
 
 import { toast } from 'react-toastify';
-import Loading from 'react-loading';
 
 export default function Whatsapp() {
   interface IForm {
