@@ -104,11 +104,13 @@ export const AuthProvider = ({ children }) => {
       });
     }
 
+    console.log(route.pathname);
     if (
       !(
         token ||
         route.asPath.includes('verify') ||
         route.asPath === '/r/[userUrl]' ||
+        route.pathname === '/[userUrl]' ||
         route.asPath.includes('/redirect')
       )
     ) {
