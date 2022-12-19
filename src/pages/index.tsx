@@ -32,7 +32,7 @@ export default function Whatsapp() {
           Deixe que te achem em todas
           <br /> as suas mídias sociais.
         </h1>
-        <h2>Crie uma página de links personalizados</h2>
+        <h2>Crie uma página de links personalizados.</h2>
       </aside>
       <aside>
         <h1>Acesse sua conta</h1>

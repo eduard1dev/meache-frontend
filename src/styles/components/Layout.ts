@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import theme from '../theme';
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -11,10 +10,11 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 28px;
+  background-color: ${({ theme }) => theme.colors.grey};
 
-  @media (max-width: 600px) {
+  /* @media (max-width: 600px) {
     height: 80px;
-  }
+  } */
 
   a {
     position: absolute;
@@ -25,13 +25,11 @@ export const HeaderContainer = styled.header`
     color: ${({ theme }) => theme.colors.text};
     font: ${(props) => props.theme.fonts.logo};
 
-    @media (max-width: 600px) {
+    /* @media (max-width: 600px) {
       top: none;
       bottom: 5%;
-    }
+    } */
   }
-
-  background-color: ${({ theme }) => theme.colors.grey};
 
   button {
     margin-left: auto;
