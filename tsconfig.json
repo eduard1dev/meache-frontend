@@ -25,7 +25,6 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
-    "src/store"
+    "node_modules"
   ]
 }

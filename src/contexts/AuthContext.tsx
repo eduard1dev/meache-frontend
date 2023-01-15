@@ -4,58 +4,58 @@ import {
   useEffect,
   SetStateAction,
   Dispatch
-} from 'react';
-import { useRouter } from 'next/router';
-import { api } from '../services/api';
-import { SubmitHandler } from 'react-hook-form';
-import { setCookie, parseCookies, destroyCookie } from 'nookies';
-import { useApi } from '../hooks/useApi';
+} from 'react'
+import { useRouter } from 'next/router'
+import { api } from '../services/api'
+import { SubmitHandler } from 'react-hook-form'
+import { setCookie, parseCookies, destroyCookie } from 'nookies'
+import { useApi } from '../hooks/useApi'
 
 interface IUser {
-  username: string;
-  hasWhatsappLink: boolean;
-  id: string;
-  whatsappLink: URL;
-  userLinks: UserLinkProps[];
-  userUrl: string;
+  username: string
+  hasWhatsappLink: boolean
+  id: string
+  whatsappLink: URL
+  userLinks: UserLinkProps[]
+  userUrl: string
 }
 
 interface IForm {
-  username: string;
-  password: string;
+  username: string
+  password: string
 }
 
 interface IAuthContext {
-  isAuthenticated: boolean;
-  user: IUser;
-  setUser: Dispatch<SetStateAction<IUser>>;
-  signIn: SubmitHandler<IForm>;
-  handleLogout: () => void;
-  postLoginApi: ReturnType<typeof useApi>;
+  isAuthenticated: boolean
+  user: IUser
+  setUser: Dispatch<SetStateAction<IUser>>
+  signIn: SubmitHandler<IForm>
+  handleLogout: () => void
+  postLoginApi: ReturnType<typeof useApi>
 }
 
 export interface UserLinkProps {
-  name: string;
-  link: string;
-  animation?: 'shake' | 'color';
+  name: string
+  link: string
+  animation?: 'shake' | 'color'
   colorTheme?: {
-    primary: string;
-    secondary: string;
-  };
-  itemType: 'title' | 'link';
-  _id: string;
+    primary: string
+    secondary: string
+  }
+  itemType: 'title' | 'link'
+  _id: string
 }
 
-export const AuthContext = createContext({} as IAuthContext);
+export const AuthContext = createContext({} as IAuthContext)
 
 export const AuthProvider = ({ children }) => {
-  const route = useRouter();
-  const [user, setUser] = useState<IUser>({ userLinks: [] } as IUser);
+  const route = useRouter()
+  const [user, setUser] = useState<IUser>({ userLinks: [] } as IUser)
 
-  const postLogin = (...args: any) => api.post('/api/auth/login', ...args);
-  const postLoginApi = useApi(postLogin);
+  const postLogin = (...args: any) => api.post('/api/auth/login', ...args)
+  const postLoginApi = useApi(postLogin)
 
-  const isAuthenticated = !!user.userUrl;
+  const isAuthenticated = !!user.userUrl
 
   const signIn: SubmitHandler<IForm> = async ({ username, password }) => {
     postLoginApi
@@ -68,43 +68,42 @@ export const AuthProvider = ({ children }) => {
       )
       .then((data) => {
         if (data) {
-          const token = data.accessToken;
+          const token = data.accessToken
           setCookie(undefined, 'nextauth.token', token, {
             maxAge: 60 * 60 * 1 // 1 hour
-          });
+          })
 
-          api.defaults.headers['token'] = '';
-          api.defaults.headers['token'] = `Bearer ${token}`;
+          api.defaults.headers['token'] = ''
+          api.defaults.headers['token'] = `Bearer ${token}`
 
-          setUser({ ...user, ...data });
+          setUser({ ...user, ...data })
 
-          route.push('/d/home');
+          route.push('/d/home')
         }
-      });
-  };
+      })
+  }
 
   const handleLogout = () => {
-    api.defaults.headers['token'] = '';
-    destroyCookie(undefined, 'nextauth.token');
+    api.defaults.headers['token'] = ''
+    destroyCookie(undefined, 'nextauth.token')
+    setUser({} as IUser)
 
-    route.push('/');
+    route.push('/')
+  }
 
-    setUser({} as IUser);
-  };
-
-  const getUser = () => api.get('/api/user');
-  const getUserApi = useApi(getUser);
+  const getUser = () => api.get('/api/user')
+  const getUserApi = useApi(getUser)
 
   const getUserData = async () => {
-    const { 'nextauth.token': token } = parseCookies();
+    const { 'nextauth.token': token } = parseCookies()
 
     if (token) {
       await getUserApi.request().then((data) => {
-        setUser({ ...user, ...data });
-      });
+        setUser({ ...user, ...data })
+      })
     }
 
-    console.log(route.pathname);
+    console.log(route.pathname)
     if (
       !(
         token ||
@@ -114,13 +113,13 @@ export const AuthProvider = ({ children }) => {
         route.asPath.includes('/redirect')
       )
     ) {
-      route.push('/');
+      route.push('/')
     }
-  };
+  }
 
   useEffect(() => {
-    getUserData();
-  }, []);
+    getUserData()
+  }, [])
 
   return (
     <AuthContext.Provider
@@ -135,5 +134,5 @@ export const AuthProvider = ({ children }) => {
     >
       {children}
     </AuthContext.Provider>
-  );
-};
+  )
+}
