@@ -1,15 +1,11 @@
-import { useState, useReducer, FormEvent, useEffect, useContext } from 'react'
-import { LinkButtonProps } from '../components/LinkButton'
+import { useState} from 'react'
 import { useRouter } from 'next/router'
 import { BlockPicker } from 'react-color'
 import LinkButton from '../components/LinkButton'
 
 import { Container } from '../styles/pages/Redirect'
-import { AuthContext } from '../contexts/AuthContext'
-import { useApi } from '../hooks/useApi'
-import { api, getApiClient } from '../services/api'
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
-import { parseCookies } from 'nookies'
+import { api } from '../services/api'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 interface LinkButtonResponse {
   name: string
@@ -23,8 +19,6 @@ interface LinkButtonResponse {
 
 export default function Redirect({ userLinks }) {
   const router = useRouter()
-  //const { user, isAuthenticated } = useContext(AuthContext);
-  //console.log(user);
 
   const [links, setLinks] = useState<LinkButtonResponse[]>(userLinks)
 

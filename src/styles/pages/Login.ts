@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
 export const Container = styled.div`
   display: flex;
@@ -76,4 +77,24 @@ export const Container = styled.div`
       margin-left: 1rem;
     }
   }
-`;
+`
+
+export const MotionDiv = styled(motion.div)`
+  border-radius: 0.5rem;
+
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+  font: ${(props) => props.theme.fonts.strong};
+
+  /* background: linear-gradient(red, transparent),
+    linear-gradient(to top left, lime, transparent),
+    linear-gradient(to top right, blue, transparent);
+  background-blend-mode: screen;
+  z-index: -1; */
+`
