@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { BlockPicker } from 'react-color'
 import LinkButton from '../components/LinkButton'
@@ -9,8 +9,10 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 
 interface LinkButtonResponse {
   name: string
+  description?: string
   link: string
   animation?: 'shake' | 'color'
+  image?: string
   colorTheme?: {
     primary: string
     secondary: string
@@ -35,6 +37,8 @@ export default function Redirect({ userLinks }) {
           animation={item.animation}
           colorTheme={item.colorTheme}
           name={item.name}
+          description={item.description}
+          image={item.image}
         />
       ))}
     </Container>

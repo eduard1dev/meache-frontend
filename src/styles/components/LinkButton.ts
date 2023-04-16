@@ -1,22 +1,19 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { LinkButtonProps } from '../../components/LinkButton';
+import { LinkButtonProps } from '../../components/LinkButton'
 
 export const Container = styled.a<LinkButtonProps>`
   display: flex;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
-  background-color: ${(props) =>
-    props.colorTheme?.secondary ?? props.theme.colors.grey};
 
+  padding: 2rem;
   width: 100%;
-  max-width: 500px;
-
-  padding: 40px 20px;
-  border-radius: 2px;
   margin-top: 20px;
   border: none;
+
+  align-items: center;
 
   font: ${(props) => props.theme.fonts.strong};
   font-size: 22px;
@@ -27,6 +24,7 @@ export const Container = styled.a<LinkButtonProps>`
 
   &:hover {
     transform: scale(1.008);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
 
   @keyframes shake {
@@ -52,4 +50,9 @@ export const Container = styled.a<LinkButtonProps>`
       background: #f5f5f5;
     }
   }
-`;
+
+  img {
+    border-radius: 0.5rem;
+    margin-right: 4rem;
+  }
+`
