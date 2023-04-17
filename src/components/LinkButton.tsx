@@ -1,7 +1,6 @@
 import { AnchorHTMLAttributes } from 'react'
 import * as S from '../styles/components/LinkButton'
 import Image from 'next/image'
-import theme from '../styles/theme'
 
 export interface LinkButtonProps
   extends AnchorHTMLAttributes<HTMLAnchorElement> {

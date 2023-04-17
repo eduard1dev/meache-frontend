@@ -1,0 +1,30 @@
+[
+    {
+      "name": "Carlos Eduardo",
+      "itemType": "title"
+    },
+    {
+      "name": "Instagram",
+      "link": "https://www.google.com.br",
+      "animation": "shake",
+      "itemType": "link"
+    },
+    {
+      "name": "Linkedin",
+      "link": "www.google.com.br",
+      "animation": "shake",
+      "itemType": "link"
+    },
+    {
+      "name": "Twitter",
+      "link": "www.google.com.br",
+      "animation": "shake",
+      "itemType": "link"
+    },
+    {
+      "name": "Teste",
+      "link": "www.google.com.br",
+      "animation": "color",
+      "itemType": "link"
+    }
+  ]

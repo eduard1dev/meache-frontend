@@ -20,13 +20,9 @@ interface LinkButtonResponse {
 }
 
 export default function Redirect({ userLinks }) {
-  const router = useRouter()
-
   const [links, setLinks] = useState<LinkButtonResponse[]>(userLinks)
 
   const [colorPicked, setColorPicked] = useState('#FFFFFF')
-
-  const { id } = router.query
 
   return (
     <Container>
