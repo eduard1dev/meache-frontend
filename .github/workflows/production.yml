@@ -7,10 +7,10 @@ on:
     branches:
       - main
 jobs:
-  Unit-tests: 
+  Unit-tests:
     runs-on: ubunto-latest
     steps:
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: Install dependencies
         run: yarn
       - name: Run Jest tests
