@@ -6,7 +6,7 @@
     "start": "next start",
     "prettier-format": "prettier --config .prettierrc src/**/*.tsx --write",
     "lint": "eslint src/*",
-    "test": "jest --watch"
+    "test": "jest"
   },
   "dependencies": {
     "@ant-design/icons": "4.0.0",
