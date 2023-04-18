@@ -17,6 +17,7 @@ jobs:
         run: yarn test
   Deploy-Production:
     runs-on: ubuntu-latest
+    needs: Unit-tests
     steps:
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
